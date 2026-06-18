@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # name of app may change later
-    path('', include('CalorieCounterApp.urls')), 
+    path('', include('app.urls')), 
 ]
