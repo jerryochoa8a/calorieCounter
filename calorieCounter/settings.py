@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     # name for app may change later
 
-    'CalorieCounterApp', 
+    'app', 
 ]
 
 MIDDLEWARE = [
