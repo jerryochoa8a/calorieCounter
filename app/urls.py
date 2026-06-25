@@ -6,8 +6,9 @@ urlpatterns = [
 
     path('new_user', views.new_user), #change function name
     path('user_login', views.user_login), # change function name
-    path('success', views.success), #change function name
-    path('success/logout', views.logout), # change function name
+    path('home', views.home), #change function name
+    path('logout', views.logout), # change function name
+    
 
 ]
 
