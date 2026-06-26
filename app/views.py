@@ -8,9 +8,12 @@ import bcrypt
 def loginPage(request):
     return render(request, "loginPage.html")
 
+<<<<<<< HEAD
 def regPage(request):
     return render(request, "regPage.html")
 
+=======
+>>>>>>> 7b10b97ac5cd646a451e193a9dae764008d0d281
 # Creating a new user
 
 def new_user(request):
