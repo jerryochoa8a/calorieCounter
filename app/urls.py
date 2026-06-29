@@ -2,12 +2,15 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # Pages
     path('', views.loginPage, name='loginPage'),
+    path('regPage', views.regPage, name='regPage'),
+    path('home', views.home),
 
-    path('new_user', views.new_user), #change function name
-    path('user_login', views.user_login), # change function name
-    path('home', views.home), #change function name
-    path('logout', views.logout), # change function name
+    # Functions
+    path('new_user', views.new_user), 
+    path('user_login', views.user_login),
+    path('home/logout', views.logout), 
     
 
 ]

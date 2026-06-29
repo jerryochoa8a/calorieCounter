@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login page</title>
 </head>
 <body>
-    <h1>login page</h1>
+
+    <p>Temporary Login page to test functionality</p>
+
+    <!-- its an array of error for mult problems in reg page -->
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form action="/user_login" method="POST">
+        {% csrf_token %}
+
+        <h2>Email</h2>
+        <input type="text" name="login_email">
+        <h2>Password</h2>
+        <input type="text" name="login_pw">
+        
+        <div>
+            <button type="submit">Login</button>
+        </div>
+
+    </form>
+
+    <p>Dont have an account? Register <a href="/regPage">here</a></p>
+    
+    
 </body>
 </html>
