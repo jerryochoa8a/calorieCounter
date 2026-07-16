@@ -3,6 +3,9 @@ from app.models import User
 from django.contrib import messages
 from django.http import HttpResponse
 import bcrypt
+from django.conf import settings
+import requests
+
 
 ### PAGES ##########
 
@@ -20,8 +23,8 @@ def home(request):
             'home.html',
             {"user" : User.objects.get(id=request.session['userid'])}
         )
-
-    return redirect('/')
+    else:
+        return redirect('/')
 
 
 #########################################
@@ -64,5 +67,53 @@ def logout(request):
     return redirect('/')
 
 
- 
+#food API search
+def GetfoodInfo(search):
+    # Search = Amount + Food
+    api_key = settings.calorieninjas_APIKey
+
+    url = "https://api.calorieninjas.com/v1/nutrition"
+    headers = {
+        "X-Api-Key": f"{api_key}"
+    }
+    params = {
+        "query": f"{search}",
+        #Ex) "query": "1 eggs",
+    }
+    response = requests.get(url,headers=headers, params=params)
+    data = response.json()
+
+    #Just display to the page to alow the use to confirm info -> addTo_foodlog()
+    name =data["items"][0]["name"] #str
+    calories =data["items"][0]["calories"] #int
+    protein = data["items"][0]["protein_g"] #int
+    carbs =data["items"][0]["carbohydrates_total_g"] #int
+    fiber =data["items"][0]["fiber_g"] #int
+    fat =data["items"][0]["fat_total_g"] #int
+    
+    
+    
+def addTo_Foodlog(foodInfo):
+    #making the food object
+    foodItem = Food.objects.create(
+        name =foodInfo.name, #str
+        calories = foodInfo.calories, #int
+        protein = foodInfo.protein, #int
+        carbs = foodInfo.carbs, #int
+        fiber = foodInfo.fiber, #int
+        fat = foodInfo.fat, #int
+    )
+    # get the food log with the the users ID and todays date
+    foodLog = FoodLog.objects.filter(userID=request.POST[''], date="todays date" )
+    # [if] there is no foodLog found then make one(userID, Date) -> createFoodlog()
+
+    foodLog.log = foodItem_id
+
+
+# def createFoodlog(userID, Date):
+#     Foodlog.objects.create(
+#         log = [],
+#         user_id = userid,
+#         date = todays date,
+#     )
 
