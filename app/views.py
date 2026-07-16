@@ -3,6 +3,7 @@ from app.models import User
 from django.contrib import messages
 from django.http import HttpResponse
 import bcrypt
+import requests
 
 ### PAGES ##########
 
@@ -20,8 +21,8 @@ def home(request):
             'home.html',
             {"user" : User.objects.get(id=request.session['userid'])}
         )
-
-    return redirect('/')
+    else:
+        return redirect('/')
 
 
 #########################################
@@ -39,7 +40,7 @@ def new_user(request):
             email = request.POST['email'],
             password = pw_hash
         )
-        print(User.objects.all())
+        # print(User.objects.all())
 
         return redirect('/')
 
@@ -64,5 +65,48 @@ def logout(request):
     return redirect('/')
 
 
- 
+def getFoodCalories(request): # Search = Amount + Food
+    search = request.POST['amount'] + request.POST['food']
 
+    url = "https://api.calorieninjas.com/v1/nutrition"
+    headers = {
+        "X-Api-Key": "x/emm0VcKlOoc+mRMURCIA==AzrAJ19yrPQ2s7eX"
+    }
+    params = {
+        "query": f"{search}",
+        # "query": "1 eggs",
+    }
+    response = requests.get(url,headers=headers, params=params)
+    data = response.json()
+
+    ## We can put this data in a object and to the page.
+    ## we can have the user see and confirm the data then
+    ## have another function save the confirmed data to user food log
+
+    name = data["items"][0]["name"] #str
+    calories = data["items"][0]["calories"] #int
+    protein = data["items"][0]["protein_g"] #int
+    carbs = data["items"][0]["carbohydrates_total_g"] #int
+    fiber = data["items"][0]["fiber_g"] #int
+    fat =  data["items"][0]["fat_total_g"] #int
+
+def addToFoodlog(foodData):
+    Food.objects.create( #Food model
+        food = foodData.name,
+        protein = foodData.protein,
+        carbs = foodData.carbs,
+        fiber = foodData.fiber,
+        fat = foodData.fat
+    )
+    
+    ## if food log at this date wasnt created at this date
+    ## we should make one.
+    ## maybe we can make the food long once we open the search page.
+    ## the user doesnt have to add anything to there log but at least its 
+    ## created
+
+    # FoodLog.objects.create(
+    #     userID = user id
+    #     log = the Food ID
+    #     date = todays date
+    # )
