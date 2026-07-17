@@ -5,6 +5,8 @@ from django.http import HttpResponse
 import bcrypt
 from django.conf import settings
 import requests
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 
 ### PAGES ##########
@@ -32,10 +34,49 @@ def home(request):
 
 # Creating a new user
 def new_user(request):
-        # If errors: re-render page with error
-        # else:
+
+        # email errors:
+        email = request.POST['email']
+
+        # validates correct email format
+        try:
+            validate_email(email)
+        except ValidationError:
+            return render(request, "regPage.html", {"error": "Please enter a valid email address."})
+
+        # validates if email is already in use
+        if User.objects.filter(email=email).exists():
+            return render(request, "regPage.html", {"error": "Email is already in use."})
+
+        # first name errors:
+        first_name = request.POST['fname']
+
+        # first name is not empty
+        if not first_name:
+            return render(request, "regPage.html", {"error": "First name cannot be empty."})
+
+        # last name errors:
+        last_name = request.POST['lname']
+
+        # last name is not empty
+        if not last_name:
+            return render(request, "regPage.html", {"error": "Last name cannot be empty."})
+
+        # password errors:
         password = request.POST['password']
+
+        # password is not empty
+        if not password:
+            return render(request, "regPage.html", {"error": "Password cannot be empty."})
+
+        # password must be at least 8 characters long
+        if len(password) < 8:
+            return render(request, "regPage.html", {"error": "Password must be at least 8 characters long."})
+
+        # hash the password
         pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+        # creates the user in the database
         User.objects.create(
             first_name = request.POST['fname'],
             last_name = request.POST['lname'],
