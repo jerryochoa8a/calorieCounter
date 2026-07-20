@@ -17,20 +17,26 @@ def loginPage(request):
 def regPage(request):
     return render(request, "regPage.html")
 
-def home(request):
+## Base(Home) is the main page to the website- able to toggle through pages
+def base(request): 
     if request.session.get('userid'):
         messages.error(request, "Successfully logged in!")
         return render(
             request,
-            'home.html',
+            'base.html',
             {"user" : User.objects.get(id=request.session['userid'])}
         )
     else:
         return redirect('/')
+    
+def home(request):
+    return render(request, "home.html")
+
+def about(request):
+    return render(request, "about.html")
 
 
 #########################################
-
 
 # Creating a new user
 def new_user(request):
@@ -85,7 +91,7 @@ def new_user(request):
         )
         print(User.objects.all())
 
-        return redirect('/')
+        return redirect('/base')
 
 
 # Logging in an existing user
@@ -94,11 +100,11 @@ def user_login(request):
     if user:
         logged_user = user[0]
         if bcrypt.checkpw(request.POST['login_pw'].encode(), logged_user.password.encode()):
-            request.session['userid'] = logged_user.id # Home function
-            return redirect('/home')
+            request.session['userid'] = logged_user.id
+            return redirect('/base')
     else:
-        messages.error(request, "Wrong email or password")
-        return redirect('/') # This will redirect to home page if the user login failed 
+        errorMessage = {"error": "Wrong email or password"}
+        return render(request,'loginPage.html', errorMessage) # This will redirect to home page if the user login failed 
 
 
 # Logging out a user
@@ -109,8 +115,12 @@ def logout(request):
 
 
 #food API search
-def GetfoodInfo(search):
+def GetfoodInfo(request):
     # Search = Amount + Food
+    amount = request.POST['amount']
+    food = request.POST['food']
+    search = amount + food
+
     api_key = settings.calorieninjas_APIKey
 
     url = "https://api.calorieninjas.com/v1/nutrition"
@@ -124,14 +134,17 @@ def GetfoodInfo(search):
     response = requests.get(url,headers=headers, params=params)
     data = response.json()
 
-    #Just display to the page to alow the use to confirm info -> addTo_foodlog()
-    name =data["items"][0]["name"] #str
-    calories =data["items"][0]["calories"] #int
-    protein = data["items"][0]["protein_g"] #int
-    carbs =data["items"][0]["carbohydrates_total_g"] #int
-    fiber =data["items"][0]["fiber_g"] #int
-    fat =data["items"][0]["fat_total_g"] #int
-    
+    #Just display to the page to alow the user to confirm info -> addTo_foodlog()    
+    foodInfo = {
+        "name": data["items"][0]["name"], #str, 
+        "calories": data["items"][0]["calories"], #int
+        "protein":data["items"][0]["protein_g"], #int,
+        "carbs":data["items"][0]["carbohydrates_total_g"], #int
+        "fiber":data["items"][0]["fiber_g"], #int
+        "fat":data["items"][0]["fat_total_g"], #int
+    }
+
+    return render(request,'html', foodInfo) # ! once page is avalable update
     
     
 def addTo_Foodlog(foodInfo):
