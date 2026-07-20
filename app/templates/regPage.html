@@ -11,15 +11,10 @@
 
     <p>Temporary Registration page to test functionality</p>
 
-    <!-- its an array of error for mult problems in reg page -->
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
+    <!-- displays form errors -->
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
     {% endif %}
-
 
 
     <form action="/new_user" method="POST">
