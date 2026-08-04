@@ -14,7 +14,6 @@ from django.db import models
 # Create your models here.
 
 class User(models.Model):
-
      """
      Class Name: User
      Programmer: Jerry Ochoa
@@ -23,21 +22,14 @@ class User(models.Model):
      time when the user was created and last updated.
 
      """
-
      first_name = models.CharField(max_length=20)
      last_name = models.CharField(max_length=20)
      email = models.CharField(max_length=40)
-     # weight = models.IntegerField()
-     # height = models.IntegerField()
-     # age = models.IntegerField()
-     # gender = models.CharField()
      password = models.CharField(max_length=50)
-
      created_at = models.DateTimeField(auto_now_add=True)
      updated_at = models.DateTimeField(auto_now=True)
 
 class Profile(models.Model):
-
      """
      Class Name: Profile
      Programmer: Jared Jasso
@@ -91,7 +83,6 @@ class Profile(models.Model):
      )
 
 class TargetCalories(models.Model):
-
      """
      Class Name: TargetCalories
      Programmer: Jared Jasso
@@ -112,7 +103,6 @@ class TargetCalories(models.Model):
      updated_at = models.DateTimeField(auto_now=True)
 
 class Food(models.Model):
-
      """
      Class Name: Food
      Programmer: Jared Jasso
@@ -134,8 +124,8 @@ class Food(models.Model):
      def __str__(self):
         return self.name
 
-class FoodLog(models.Model):
 
+class FoodLog(models.Model):
      """
      Class Name: FoodLog
      Programmer: Jared Jasso
@@ -172,7 +162,6 @@ class FoodLog(models.Model):
         )
 
 class FoodLogEntry(models.Model):
-
      """
      Class Name: FoodLogEntry
      Programmer: Jared Jasso

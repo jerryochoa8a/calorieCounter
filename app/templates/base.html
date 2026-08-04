@@ -52,6 +52,25 @@
                 <div class="content-section">
                         <h3>Our Sidebar</h3>
                         <p>Hello {{user.first_name}}</p>
+                        <a href="/logout" >Logout</a>
+                        <p>==============================</p>
+
+                        {% if profileInfo is None %}
+                        
+                        <p>You havent taken our Fitness Survey yet.</p>
+                        <a href="/fitnessSurveyPage" >fitness Survey</a>
+                        
+                        {% else %}
+                        
+                        <p>Profile found</p>
+                        
+                        {% endif %}
+
+                        <p>======================</p>
+
+                        <a href="/food">FoodLog Page</a>
+                        <p>======================</p>
+
                         <p class='text-muted'>You can put any information here you'd like.
                         <ul class="list-group">
                         <li class="list-group-item list-group-item-light">Latest Posts</li>
