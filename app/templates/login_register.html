@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+
+{% block title %}Log In or Register | My Workout Homie{% endblock %}
+
+{% block extra_css %}
+<style>
+    .auth-wrap {
+        width: 100%;
+    }
+
+    .auth-header {
+        margin: 26px 0 22px;
+        text-align: center;
+    }
+
+    .auth-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 14px;
+        background: var(--card);
+        border-radius: 22px;
+        font-size: 34px;
+    }
+
+    .auth-header p {
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    .auth-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 5px;
+        margin-bottom: 16px;
+        background: var(--card);
+        border-radius: 12px;
+    }
+
+    .auth-tab {
+        width: 100%;
+        margin: 0;
+        background: transparent;
+        color: var(--muted);
+    }
+
+    .auth-tab.active {
+        background: var(--card-light);
+        color: var(--text);
+    }
+
+    .auth-panel {
+        display: none;
+    }
+
+    .auth-panel.active {
+        display: block;
+    }
+
+    .form-title {
+        margin-bottom: 4px;
+    }
+
+    .form-subtitle {
+        margin-bottom: 18px;
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+    .helptext {
+        display: block;
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .auth-footer {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    @media (min-width: 700px) {
+        .auth-wrap {
+            max-width: 520px;
+            margin: 0 auto;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-wrap" id="auth-app">
+    <section class="auth-header">
+        <div class="auth-icon">💪</div>
+        <h1>Welcome, homie</h1>
+        <p>Track your workouts, goals, water, steps, and progress in one place.</p>
+    </section>
+
+    <div class="auth-tabs" role="tablist" aria-label="Account options">
+        <button
+            type="button"
+            class="auth-tab active"
+            id="login-tab"
+            role="tab"
+            aria-controls="login-panel"
+            aria-selected="true"
+            data-panel="login"
+        >
+            Log In
+        </button>
+
+        <button
+            type="button"
+            class="auth-tab"
+            id="register-tab"
+            role="tab"
+            aria-controls="register-panel"
+            aria-selected="false"
+            data-panel="register"
+        >
+            Register
+        </button>
+    </div>
+
+    <section
+        class="card auth-panel active"
+        id="login-panel"
+        role="tabpanel"
+        aria-labelledby="login-tab"
+    >
+        <h2 class="form-title">Log In</h2>
+        <p class="form-subtitle">Continue working toward your fitness goals.</p>
+
+        <form method="post" action="{% url 'login_register' %}">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="login">
+
+            {{ login_form.non_field_errors }}
+
+            {% for field in login_form %}
+                <div>
+                    {{ field.label_tag }}
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <span class="helptext">{{ field.help_text }}</span>
+                    {% endif %}
+
+                    {{ field.errors }}
+                </div>
+            {% endfor %}
+
+            <button type="submit" name="submit_login">Log In</button>
+        </form>
+    </section>
+
+    <section
+        class="card auth-panel"
+        id="register-panel"
+        role="tabpanel"
+        aria-labelledby="register-tab"
+        hidden
+    >
+        <h2 class="form-title">Create Account</h2>
+        <p class="form-subtitle">Start building healthier habits today.</p>
+
+        <form method="post" action="{% url 'login_register' %}">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="register">
+
+            {{ register_form.non_field_errors }}
+
+            {% for field in register_form %}
+                <div>
+                    {{ field.label_tag }}
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <span class="helptext">{{ field.help_text }}</span>
+                    {% endif %}
+
+                    {{ field.errors }}
+                </div>
+            {% endfor %}
+
+            <button type="submit" name="submit_register">Create Account</button>
+        </form>
+    </section>
+
+    <p class="auth-footer">
+        Keep your login information secure and use My Workout Homie responsibly.
+    </p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const loginPanel = document.getElementById("login-panel");
+        const registerPanel = document.getElementById("register-panel");
+        const loginTab = document.getElementById("login-tab");
+        const registerTab = document.getElementById("register-tab");
+        const tabs = document.querySelectorAll(".auth-tab");
+
+        function showPanel(panelName) {
+            const showLogin = panelName === "login";
+
+            loginPanel.classList.toggle("active", showLogin);
+            registerPanel.classList.toggle("active", !showLogin);
+
+            loginPanel.hidden = !showLogin;
+            registerPanel.hidden = showLogin;
+
+            loginTab.classList.toggle("active", showLogin);
+            registerTab.classList.toggle("active", !showLogin);
+
+            loginTab.setAttribute("aria-selected", String(showLogin));
+            registerTab.setAttribute("aria-selected", String(!showLogin));
+        }
+
+        tabs.forEach(function (tab) {
+            tab.addEventListener("click", function () {
+                showPanel(tab.dataset.panel);
+            });
+        });
+
+        const registerHasErrors = registerPanel.querySelector(".errorlist") !== null;
+        const loginHasErrors = loginPanel.querySelector(".errorlist") !== null;
+
+        if (registerHasErrors) {
+            showPanel("register");
+        } else if (loginHasErrors) {
+            showPanel("login");
+        } else {
+            showPanel("login");
+        }
+    });
+</script>
+{% endblock %}
