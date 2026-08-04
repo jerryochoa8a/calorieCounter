@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome | My Workout Homie{% endblock %}
+
+{% block extra_css %}
+<style>
+    .startup-screen {
+        min-height: calc(100vh - 140px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .startup-card {
+        width: 100%;
+        padding: 34px 22px;
+        background: linear-gradient(180deg, #1c1c1e 0%, #111113 100%);
+        border: 1px solid #2c2c2e;
+        border-radius: 28px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .startup-logo {
+        width: 88px;
+        height: 88px;
+        margin: 0 auto 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #2c2c2e;
+        border-radius: 26px;
+        font-size: 42px;
+    }
+
+    .startup-kicker {
+        margin-bottom: 10px;
+        color: var(--blue);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+    }
+
+    .startup-title {
+        margin-bottom: 12px;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+        font-size: clamp(38px, 10vw, 58px);
+        line-height: 0.98;
+        letter-spacing: -2px;
+        font-weight: 800;
+    }
+
+    .startup-subtitle {
+        max-width: 340px;
+        margin: 0 auto 28px;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.55;
+    }
+
+    .startup-button {
+        min-height: 52px;
+        border-radius: 14px;
+        font-size: 16px;
+    }
+
+    .startup-note {
+        margin: 14px 0 0;
+        color: #6e6e73;
+        font-size: 12px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="startup-screen">
+    <div class="startup-card">
+        <div class="startup-logo">💪</div>
+
+        <div class="startup-kicker">My Workout Homie</div>
+
+        <h1 class="startup-title">Let's get started.</h1>
+
+        <p class="startup-subtitle">
+            Build better habits, track your progress, and stay focused on your fitness goals.
+        </p>
+
+        <a class="button startup-button" href="{% url 'login_register' %}">
+            Continue
+        </a>
+
+        <p class="startup-note">
+            Lets get yolked!
+        </p>
+    </div>
+</section>
+{% endblock %}
