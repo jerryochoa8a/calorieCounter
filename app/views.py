@@ -28,17 +28,33 @@ Programmer: Jerry Ochoa
 Displays the corresponding page when the user navigates to the URL. It renders the HTML 
 template for each page and passes any necessary context data to the template.
 """
-def loginPage(request):
-    return render(request, "loginPage.html")
+def login_register(request):
+    return render(request, "login_register.html")
+
+def dashboard(request):
+    return render(request, "dashboard.html")
+
+def startup(request):
+    return render(request, "startup.html")
 
 
-def regPage(request):
-    return render(request, "regPage.html")
+def fitness_survey(request):
+    return render(request, "fitness_survey.html")
 
 
 ## Base(Home) is the main page to the website- able to toggle through pages
 def base(request): 
-    ##!!DOCUMENT!!##
+    """
+        Function Name: base
+        Programmer: Jerry Ochoa
+
+        The main goal of this function is to render the base.html to the page. Before we render 
+        the page are also making checks such as whether or not a User is currently logged in. 
+        If not, the page will redirect to the login page. We are also checking to see if the user 
+        has completed their profile yet witch is the fitness survey. If no profile object has been
+        created, then we set the profile field as None. This changes the contents of the frontend to 
+        have the user fill out the fitness survey before accessing the other functionality of the page. 
+    """
     if request.session.get('userid'):
         userInfo = User.objects.get(id=request.session['userid'])
 
@@ -57,21 +73,6 @@ def base(request):
     else:
         return redirect('/')
 
-
-def fitnessSurveyPage(request):
-    return render(request, "fitnessSurveyPage.html")
-
-
-def foodLogPage(request):
-    return(request, "foodLogPage.html")
-
-
-def home(request):
-    return render(request, "home.html")
-
-
-def about(request):
-    return render(request, "about.html")
 
 
 #########################################

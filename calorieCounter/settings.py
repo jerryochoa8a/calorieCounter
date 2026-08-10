@@ -47,9 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # name for app may change later
-
     'app', 
+
+    # For the dashboard.html
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

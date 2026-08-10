@@ -14,12 +14,11 @@ from . import views
 
 urlpatterns = [
     # Pages
-    path('', views.loginPage, name='loginPage'), ##website opens to the login page
-    path('regPage', views.regPage, name='regPage'),
+    path('', views.startup, name='startup'), 
     path('base', views.base, name="base"), 
-    path('home', views.home, name='home'), 
-    path('about', views.about, name='about'), 
-    path('fitnessSurveyPage/', views.fitnessSurveyPage, name='fitnessSurveyPage'),
+    path('login_register', views.login_register, name='login_register'),
+    path('dashboard', views.dashboard, name='dashboard'),
+    path('fitness_surveyPage', views.fitness_survey, name='fitness_survey'),
 
     # Functions
     path('new_user', views.new_user), ## registers User
