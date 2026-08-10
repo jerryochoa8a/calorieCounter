@@ -32,10 +32,16 @@ def login_register(request):
     return render(request, "login_register.html")
 
 def dashboard(request):
-    return render(request, "dashboard.html")
+    return render(request, "dashboard_v2.html")
 
 def startup(request):
     return render(request, "startup.html")
+
+def foodlogPage(request):
+    return render(request, "foodlog.html")
+
+def waterPage(request):
+    return render(request, 'waterlog.html')
 
 
 def fitness_survey(request):

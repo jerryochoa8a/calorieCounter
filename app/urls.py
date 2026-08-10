@@ -19,12 +19,15 @@ urlpatterns = [
     path('login_register', views.login_register, name='login_register'),
     path('dashboard', views.dashboard, name='dashboard'),
     path('fitness_surveyPage', views.fitness_survey, name='fitness_survey'),
+    path('food_log', views.foodlogPage, name='food_log'),
+    path('water', views.waterPage, name='water'),
 
     # Functions
     path('new_user', views.new_user), ## registers User
     path('user_login', views.user_login), ## Login User
     path('logout', views.logout), ##logout User    
-    path('fitnessSurvey', views.fitnessSurvey), ## submit Fitness Survey    
+    path('fitnessSurvey', views.fitnessSurvey), ## submit Fitness Survey
+    path('searchFood', views.GetfoodInfo),  ##food API  
 
 ]
 
