@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module app.views</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="app.html" class="white">app</a>.views</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:e%3A%5Ccsun%5Ccomp380%5Ccaloriecounter%5Capp%5Cviews.py">e:\csun\comp380\caloriecounter\app\views.py</a></td></tr></table>
+    <p><span class="code">Module&nbsp;Name:&nbsp;views.py<br>
+Date:&nbsp;7/30/2026<br>
+Programmers:&nbsp;Jerry&nbsp;Ochoa&nbsp;and&nbsp;Jared&nbsp;Jasso<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;contains&nbsp;the&nbsp;functions&nbsp;for&nbsp;the&nbsp;calorie&nbsp;counter&nbsp;app.&nbsp;It&nbsp;handles&nbsp;page&nbsp;navigation,&nbsp;<br>
+user&nbsp;registration,&nbsp;login/logout,&nbsp;food&nbsp;searches&nbsp;using&nbsp;an&nbsp;external&nbsp;API,&nbsp;food&nbsp;log&nbsp;managenment<br>
+and&nbsp;target&nbsp;calorie&nbsp;calculations.</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="bcrypt.html">bcrypt</a><br>
+</td><td class="multicolumn"><a href="django.contrib.messages.html">django.contrib.messages</a><br>
+</td><td class="multicolumn"><a href="requests.html">requests</a><br>
+</td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-GetfoodInfo"><strong>GetfoodInfo</strong></a>(request)</dt><dd><span class="code">Function&nbsp;Name:&nbsp;GetfoodInfo<br>
+Programmer:&nbsp;Jerry&nbsp;Ochoa<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;searches&nbsp;for&nbsp;food&nbsp;information&nbsp;using&nbsp;the&nbsp;CalorieNinjas&nbsp;API.<br>
+The&nbsp;API&nbsp;works&nbsp;best&nbsp;when&nbsp;giving&nbsp;an&nbsp;amount,&nbsp;such&nbsp;as&nbsp;serving&nbsp;size,&nbsp;first&nbsp;then&nbsp;<br>
+the&nbsp;foods&nbsp;name.&nbsp;The&nbsp;search&nbsp;returns&nbsp;a&nbsp;JSON&nbsp;response&nbsp;where&nbsp;we&nbsp;then&nbsp;transform<br>
+and&nbsp;extract&nbsp;the&nbsp;data&nbsp;into&nbsp;a&nbsp;dictionary.<br>
+(Future&nbsp;Plans)&nbsp;-&nbsp;this&nbsp;information&nbsp;will&nbsp;pass&nbsp;the&nbsp;nutritional&nbsp;information&nbsp;to&nbsp;<br>
+a&nbsp;template&nbsp;for&nbsp;the&nbsp;user&nbsp;to&nbsp;confirm,&nbsp;before&nbsp;storing&nbsp;into&nbsp;the&nbsp;users&nbsp;food&nbsp;log.</span></dd></dl>
+ <dl><dt><a name="-addTo_Foodlog"><strong>addTo_Foodlog</strong></a>(request, foodInfo)</dt><dd><span class="code">Function&nbsp;Name:&nbsp;addTo_Foodlog<br>
+Programmer:&nbsp;Jerry&nbsp;Ochoa<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;will&nbsp;run&nbsp;after&nbsp;the&nbsp;user&nbsp;has&nbsp;confirmed&nbsp;the&nbsp;food&nbsp;information.<br>
+We&nbsp;first&nbsp;create&nbsp;a&nbsp;food&nbsp;object&nbsp;with&nbsp;the&nbsp;dictionary&nbsp;that&nbsp;came&nbsp;from&nbsp;our&nbsp;CalorieNinjas&nbsp;API.<br>
+We&nbsp;then&nbsp;check&nbsp;to&nbsp;see&nbsp;if&nbsp;the&nbsp;users&nbsp;profile&nbsp;already&nbsp;has&nbsp;a&nbsp;food&nbsp;log&nbsp;for&nbsp;the&nbsp;current&nbsp;date.<br>
+If&nbsp;it&nbsp;does&nbsp;not&nbsp;then&nbsp;we&nbsp;create&nbsp;one&nbsp;and&nbsp;add&nbsp;the&nbsp;food&nbsp;item.&nbsp;If&nbsp;it&nbsp;does&nbsp;then&nbsp;we&nbsp;get&nbsp;the<br>
+food&nbsp;log&nbsp;and&nbsp;add&nbsp;the&nbsp;food&nbsp;item&nbsp;to&nbsp;the&nbsp;log.</span></dd></dl>
+ <dl><dt><a name="-base"><strong>base</strong></a>(request)</dt><dd><span class="code">Function&nbsp;Name:&nbsp;base<br>
+Programmer:&nbsp;Jerry&nbsp;Ochoa<br>
+&nbsp;<br>
+The&nbsp;main&nbsp;goal&nbsp;of&nbsp;this&nbsp;function&nbsp;is&nbsp;to&nbsp;render&nbsp;the&nbsp;base.html&nbsp;to&nbsp;the&nbsp;page.&nbsp;Before&nbsp;we&nbsp;render&nbsp;<br>
+the&nbsp;page&nbsp;are&nbsp;also&nbsp;making&nbsp;checks&nbsp;such&nbsp;as&nbsp;whether&nbsp;or&nbsp;not&nbsp;a&nbsp;User&nbsp;is&nbsp;currently&nbsp;logged&nbsp;in.&nbsp;<br>
+If&nbsp;not,&nbsp;the&nbsp;page&nbsp;will&nbsp;redirect&nbsp;to&nbsp;the&nbsp;login&nbsp;page.&nbsp;We&nbsp;are&nbsp;also&nbsp;checking&nbsp;to&nbsp;see&nbsp;if&nbsp;the&nbsp;user&nbsp;<br>
+has&nbsp;completed&nbsp;their&nbsp;profile&nbsp;yet&nbsp;witch&nbsp;is&nbsp;the&nbsp;fitness&nbsp;survey.&nbsp;If&nbsp;no&nbsp;profile&nbsp;object&nbsp;has&nbsp;been<br>
+created,&nbsp;then&nbsp;we&nbsp;set&nbsp;the&nbsp;profile&nbsp;field&nbsp;as&nbsp;None.&nbsp;This&nbsp;changes&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;frontend&nbsp;to&nbsp;<br>
+have&nbsp;the&nbsp;user&nbsp;fill&nbsp;out&nbsp;the&nbsp;fitness&nbsp;survey&nbsp;before&nbsp;accessing&nbsp;the&nbsp;other&nbsp;functionality&nbsp;of&nbsp;the&nbsp;page.</span></dd></dl>
+ <dl><dt><a name="-calculateTargetCalories"><strong>calculateTargetCalories</strong></a>(request, profile_id)</dt><dd><span class="code">Function&nbsp;Name:&nbsp;calculateTargetCalories<br>
+Programmer:&nbsp;Jared&nbsp;Jasso<br>
+&nbsp;<br>
+Function&nbsp;calculates&nbsp;the&nbsp;target&nbsp;calories&nbsp;for&nbsp;a&nbsp;user&nbsp;based&nbsp;on&nbsp;their&nbsp;profile&nbsp;information.<br>
+It&nbsp;calculates&nbsp;the&nbsp;Basal&nbsp;Metabolic&nbsp;Rate&nbsp;(BMR)&nbsp;based&nbsp;on&nbsp;the&nbsp;user's&nbsp;sex,&nbsp;weight,&nbsp;height,<br>
+and&nbsp;age.&nbsp;It&nbsp;then&nbsp;applies&nbsp;an&nbsp;activity&nbsp;level&nbsp;multiplier&nbsp;based&nbsp;on&nbsp;the&nbsp;user's&nbsp;activity&nbsp;level.<br>
+Finally,&nbsp;it&nbsp;adjusts&nbsp;the&nbsp;target&nbsp;calories&nbsp;based&nbsp;on&nbsp;the&nbsp;user's&nbsp;fitness&nbsp;goal&nbsp;(lose&nbsp;weight,&nbsp;<br>
+gain&nbsp;weight,&nbsp;or&nbsp;maintain&nbsp;weight).&nbsp;<br>
+&nbsp;<br>
+The&nbsp;function&nbsp;uses&nbsp;the&nbsp;Mifflin-St&nbsp;Jeor&nbsp;equation&nbsp;to&nbsp;calculate&nbsp;BMR&nbsp;and&nbsp;returns&nbsp;the&nbsp;target&nbsp;calories&nbsp;as&nbsp;an&nbsp;integer.<br>
+&nbsp;<br>
+Female&nbsp;BMR&nbsp;=&nbsp;(10&nbsp;*&nbsp;weight)&nbsp;+&nbsp;(6.25&nbsp;*&nbsp;height)&nbsp;-&nbsp;(5&nbsp;*&nbsp;age)&nbsp;-&nbsp;161<br>
+Male&nbsp;BMR&nbsp;=&nbsp;(10&nbsp;*&nbsp;weight)&nbsp;+&nbsp;(6.25&nbsp;*&nbsp;height)&nbsp;-&nbsp;(5&nbsp;*&nbsp;age)&nbsp;+&nbsp;5</span></dd></dl>
+ <dl><dt><a name="-dashboard"><strong>dashboard</strong></a>(request)</dt></dl>
+ <dl><dt><a name="-fitnessSurvey"><strong>fitnessSurvey</strong></a>(request)</dt><dd><span class="code">Function&nbsp;Name:&nbsp;fitnessSurvey<br>
+Programmer:&nbsp;Jerry&nbsp;Ochoa<br>
+&nbsp;<br>
+This&nbsp;function&nbsp;handles&nbsp;the&nbsp;creation&nbsp;of&nbsp;the&nbsp;Profile&nbsp;Object&nbsp;for&nbsp;the&nbsp;user.<br>
+We&nbsp;use&nbsp;the&nbsp;name&nbsp;"fitness&nbsp;survey"&nbsp;because&nbsp;best&nbsp;describes&nbsp;the&nbsp;type&nbsp;of&nbsp;information<br>
+that&nbsp;we&nbsp;need&nbsp;to&nbsp;ultimately&nbsp;finalize&nbsp;the&nbsp;users&nbsp;profile.&nbsp;We&nbsp;first&nbsp;get&nbsp;the&nbsp;User&nbsp;<br>
+Object&nbsp;through&nbsp;the&nbsp;stored&nbsp;session&nbsp;id&nbsp;(current&nbsp;logged&nbsp;in&nbsp;user&nbsp;id).&nbsp;<br>
+With&nbsp;the&nbsp;User&nbsp;Object,&nbsp;we&nbsp;now&nbsp;create&nbsp;a&nbsp;one-to-one&nbsp;relationship&nbsp;when&nbsp;making&nbsp;<br>
+the&nbsp;users&nbsp;Profile&nbsp;by&nbsp;assigning&nbsp;the&nbsp;Object&nbsp;to&nbsp;the&nbsp;user&nbsp;field.&nbsp;We&nbsp;then&nbsp;transform<br>
+weight,&nbsp;height,&nbsp;and&nbsp;age&nbsp;into&nbsp;intagers&nbsp;before&nbsp;passing&nbsp;them&nbsp;into&nbsp;their&nbsp;fields&nbsp;<br>
+because&nbsp;this&nbsp;information&nbsp;will&nbsp;later&nbsp;be&nbsp;used&nbsp;to&nbsp;calculate&nbsp;the&nbsp;users&nbsp;"Target&nbsp;Calories".</span></dd></dl>
+ <dl><dt><a name="-fitness_survey"><strong>fitness_survey</strong></a>(request)</dt></dl>
+ <dl><dt><a name="-login_register"><strong>login_register</strong></a>(request)</dt></dl>
+ <dl><dt><a name="-logout"><strong>logout</strong></a>(request)</dt><dd><span class="code">Function&nbsp;Name:&nbsp;logout<br>
+Programmer:&nbsp;Jared&nbsp;Jasso<br>
+&nbsp;<br>
+Function&nbsp;handles&nbsp;the&nbsp;logout&nbsp;of&nbsp;a&nbsp;user.&nbsp;It&nbsp;removes&nbsp;the&nbsp;user's&nbsp;ID&nbsp;from&nbsp;the&nbsp;session&nbsp;and&nbsp;displays&nbsp;a&nbsp;message<br>
+indicating&nbsp;that&nbsp;the&nbsp;user&nbsp;has&nbsp;successfully&nbsp;logged&nbsp;out.&nbsp;It&nbsp;then&nbsp;redirects&nbsp;the&nbsp;user&nbsp;to&nbsp;the&nbsp;login&nbsp;page.</span></dd></dl>
+ <dl><dt><a name="-new_user"><strong>new_user</strong></a>(request)</dt><dd><span class="code">Function&nbsp;Name:&nbsp;new_user<br>
+Programmer:&nbsp;Jared&nbsp;Jasso<br>
+&nbsp;<br>
+Handles&nbsp;the&nbsp;registration&nbsp;of&nbsp;a&nbsp;new&nbsp;user.&nbsp;It&nbsp;stores&nbsp;different&nbsp;error&nbsp;messages&nbsp;in&nbsp;case&nbsp;new&nbsp;user&nbsp;input&nbsp;is&nbsp;invalid.<br>
+If&nbsp;new&nbsp;user&nbsp;input&nbsp;is&nbsp;valid,&nbsp;it&nbsp;creates&nbsp;a&nbsp;new&nbsp;user&nbsp;in&nbsp;the&nbsp;database&nbsp;with&nbsp;the&nbsp;first&nbsp;name,&nbsp;last&nbsp;name,&nbsp;email,&nbsp;and&nbsp;<br>
+hashed&nbsp;password.&nbsp;It&nbsp;then&nbsp;redirects&nbsp;the&nbsp;user&nbsp;to&nbsp;the&nbsp;base&nbsp;page&nbsp;after&nbsp;successful&nbsp;registration.</span></dd></dl>
+ <dl><dt><a name="-startup"><strong>startup</strong></a>(request)</dt></dl>
+ <dl><dt><a name="-user_login"><strong>user_login</strong></a>(request)</dt><dd><span class="code">Function&nbsp;Name:&nbsp;user_login<br>
+Programmer:&nbsp;Jared&nbsp;Jasso<br>
+&nbsp;<br>
+Function&nbsp;handles&nbsp;the&nbsp;login&nbsp;of&nbsp;an&nbsp;existing&nbsp;user.&nbsp;It&nbsp;checks&nbsp;if<br>
+the&nbsp;submitted&nbsp;email&nbsp;matches&nbsp;an&nbsp;existing&nbsp;user,&nbsp;if&nbsp;it&nbsp;does&nbsp;<br>
+it&nbsp;checks&nbsp;if&nbsp;the&nbsp;submitted&nbsp;password&nbsp;matches&nbsp;the&nbsp;hashed&nbsp;<br>
+password&nbsp;stored&nbsp;in&nbsp;the&nbsp;database.&nbsp;If&nbsp;it&nbsp;does&nbsp;not,&nbsp;it&nbsp;shows&nbsp;an&nbsp;<br>
+error&nbsp;message,&nbsp;if&nbsp;it&nbsp;does&nbsp;it&nbsp;redirects&nbsp;the&nbsp;user&nbsp;to&nbsp;the&nbsp;base&nbsp;page<br>
+and&nbsp;stores&nbsp;the&nbsp;user's&nbsp;ID&nbsp;in&nbsp;the&nbsp;session.</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>settings</strong> = &lt;LazySettings "calorieCounter.settings"&gt;<br>
+<strong>validate_email</strong> = &lt;django.core.validators.EmailValidator object&gt;</td></tr></table>
+</body></html>

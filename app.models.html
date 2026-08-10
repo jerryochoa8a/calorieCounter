@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module app.models</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="app.html" class="white">app</a>.models</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:e%3A%5Ccsun%5Ccomp380%5Ccaloriecounter%5Capp%5Cmodels.py">e:\csun\comp380\caloriecounter\app\models.py</a></td></tr></table>
+    <p><span class="code">Name:&nbsp;models.py<br>
+Date:&nbsp;7/30/2026<br>
+Programmers:&nbsp;Jared&nbsp;Jasso&nbsp;and&nbsp;Jerry&nbsp;Ochoa<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;contains&nbsp;the&nbsp;models&nbsp;for&nbsp;our&nbsp;calorie&nbsp;counter&nbsp;app.&nbsp;The&nbsp;models&nbsp;represent&nbsp;the&nbsp;apps&nbsp;data&nbsp;which&nbsp;include&nbsp;<br>
+users,&nbsp;profiles,&nbsp;target&nbsp;calories,&nbsp;food&nbsp;logs,&nbsp;food,&nbsp;and&nbsp;food&nbsp;log&nbsp;entries.&nbsp;We&nbsp;use&nbsp;these&nbsp;models&nbsp;to&nbsp;store,&nbsp;retrieve,<br>
+and&nbsp;manage&nbsp;the&nbsp;data&nbsp;for&nbsp;this&nbsp;app.</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="django.db.models.html">django.db.models</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="django.db.models.base.html#Model">django.db.models.base.Model</a>(<a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="app.models.html#Food">Food</a>
+</dt><dt class="heading-text"><a href="app.models.html#FoodLog">FoodLog</a>
+</dt><dt class="heading-text"><a href="app.models.html#FoodLogEntry">FoodLogEntry</a>
+</dt><dt class="heading-text"><a href="app.models.html#Profile">Profile</a>
+</dt><dt class="heading-text"><a href="app.models.html#TargetCalories">TargetCalories</a>
+</dt><dt class="heading-text"><a href="app.models.html#User">User</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Food">class <strong>Food</strong></a>(<a href="django.db.models.base.html#Model">django.db.models.base.Model</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Food">Food</a>(*args,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Class&nbsp;Name:&nbsp;<a href="#Food">Food</a><br>
+Programmer:&nbsp;Jared&nbsp;Jasso<br>
+&nbsp;<br>
+Stores&nbsp;information&nbsp;about&nbsp;food&nbsp;items&nbsp;such&nbsp;as&nbsp;name,&nbsp;calories,&nbsp;protein,&nbsp;carbs,&nbsp;and&nbsp;fat.&nbsp;<br>
+This&nbsp;will&nbsp;get&nbsp;information&nbsp;from&nbsp;api&nbsp;"calorieninjas"&nbsp;<br>
+&nbsp;<br>
+The&nbsp;"__str__"&nbsp;method&nbsp;returns&nbsp;a&nbsp;readable&nbsp;string.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="app.models.html#Food">Food</a></dd>
+<dd><a href="django.db.models.base.html#Model">django.db.models.base.Model</a></dd>
+<dd><a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Food-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<strong>calories</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>carbs</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>fat</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>id</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>name</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>protein</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>foodlog_set</strong></dt>
+</dl>
+<dl><dt><strong>foodlogentry_set</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>DoesNotExist</strong> = &lt;class 'app.models.Food.DoesNotExist'&gt;</dl>
+
+<dl><dt><strong>MultipleObjectsReturned</strong> = &lt;class 'app.models.Food.MultipleObjectsReturned'&gt;</dl>
+
+<dl><dt><strong>objects</strong> = &lt;django.db.models.manager.Manager object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="Food-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><span class="code">Return&nbsp;self==value.</span></dd></dl>
+
+<dl><dt><a name="Food-__getstate__"><strong>__getstate__</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;to&nbsp;allow&nbsp;choosing&nbsp;the&nbsp;attributes&nbsp;to&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="Food-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="Food-__init__"><strong>__init__</strong></a>(self, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="Food-__reduce__"><strong>__reduce__</strong></a>(self)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="Food-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<dl><dt><a name="Food-__setstate__"><strong>__setstate__</strong></a>(self, state)</dt></dl>
+
+<dl><dt>async <a name="Food-adelete"><strong>adelete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt>async <a name="Food-arefresh_from_db"><strong>arefresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt></dl>
+
+<dl><dt>async <a name="Food-asave"><strong>asave</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">#&nbsp;RemovedInDjango60Warning:&nbsp;When&nbsp;the&nbsp;deprecation&nbsp;ends,&nbsp;replace&nbsp;with:<br>
+#&nbsp;async&nbsp;def&nbsp;<a href="#Food-asave">asave</a>(<br>
+#&nbsp;&nbsp;&nbsp;self,&nbsp;*,&nbsp;force_insert=False,&nbsp;force_update=False,&nbsp;using=None,&nbsp;update_fields=None,<br>
+#&nbsp;):</span></dd></dl>
+
+<dl><dt><a name="Food-clean"><strong>clean</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;for&nbsp;doing&nbsp;any&nbsp;extra&nbsp;model-wide&nbsp;validation&nbsp;after&nbsp;<a href="#Food-clean">clean</a>()&nbsp;has&nbsp;been<br>
+called&nbsp;on&nbsp;every&nbsp;field&nbsp;by&nbsp;self.<strong>clean_fields</strong>.&nbsp;Any&nbsp;ValidationError&nbsp;raised<br>
+by&nbsp;this&nbsp;method&nbsp;will&nbsp;not&nbsp;be&nbsp;associated&nbsp;with&nbsp;a&nbsp;particular&nbsp;field;&nbsp;it&nbsp;will<br>
+have&nbsp;a&nbsp;special-case&nbsp;association&nbsp;with&nbsp;the&nbsp;field&nbsp;defined&nbsp;by&nbsp;NON_FIELD_ERRORS.</span></dd></dl>
+
+<dl><dt><a name="Food-clean_fields"><strong>clean_fields</strong></a>(self, exclude=None)</dt><dd><span class="code">Clean&nbsp;all&nbsp;fields&nbsp;and&nbsp;raise&nbsp;a&nbsp;ValidationError&nbsp;containing&nbsp;a&nbsp;dict<br>
+of&nbsp;all&nbsp;validation&nbsp;errors&nbsp;if&nbsp;any&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="Food-date_error_message"><strong>date_error_message</strong></a>(self, lookup_type, field_name, unique_for)</dt></dl>
+
+<dl><dt><a name="Food-delete"><strong>delete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt><a name="Food-full_clean"><strong>full_clean</strong></a>(self, exclude=None, validate_unique=True, validate_constraints=True)</dt><dd><span class="code">Call&nbsp;<a href="#Food-clean_fields">clean_fields</a>(),&nbsp;<a href="#Food-clean">clean</a>(),&nbsp;<a href="#Food-validate_unique">validate_unique</a>(),&nbsp;and<br>
+<a href="#Food-validate_constraints">validate_constraints</a>()&nbsp;on&nbsp;the&nbsp;model.&nbsp;Raise&nbsp;a&nbsp;ValidationError&nbsp;for&nbsp;any<br>
+errors&nbsp;that&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="Food-get_constraints"><strong>get_constraints</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Food-get_deferred_fields"><strong>get_deferred_fields</strong></a>(self)</dt><dd><span class="code">Return&nbsp;a&nbsp;set&nbsp;containing&nbsp;names&nbsp;of&nbsp;deferred&nbsp;fields&nbsp;for&nbsp;this&nbsp;instance.</span></dd></dl>
+
+<dl><dt><a name="Food-prepare_database_save"><strong>prepare_database_save</strong></a>(self, field)</dt></dl>
+
+<dl><dt><a name="Food-refresh_from_db"><strong>refresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt><dd><span class="code">Reload&nbsp;field&nbsp;values&nbsp;from&nbsp;the&nbsp;database.<br>
+&nbsp;<br>
+By&nbsp;default,&nbsp;the&nbsp;reloading&nbsp;happens&nbsp;from&nbsp;the&nbsp;database&nbsp;this&nbsp;instance&nbsp;was<br>
+loaded&nbsp;from,&nbsp;or&nbsp;by&nbsp;the&nbsp;read&nbsp;router&nbsp;if&nbsp;this&nbsp;instance&nbsp;wasn't&nbsp;loaded&nbsp;from<br>
+any&nbsp;database.&nbsp;The&nbsp;using&nbsp;parameter&nbsp;will&nbsp;override&nbsp;the&nbsp;default.<br>
+&nbsp;<br>
+Fields&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;specify&nbsp;which&nbsp;fields&nbsp;to&nbsp;reload.&nbsp;The&nbsp;fields<br>
+should&nbsp;be&nbsp;an&nbsp;iterable&nbsp;of&nbsp;field&nbsp;attnames.&nbsp;If&nbsp;fields&nbsp;is&nbsp;None,&nbsp;then<br>
+all&nbsp;non-deferred&nbsp;fields&nbsp;are&nbsp;reloaded.<br>
+&nbsp;<br>
+When&nbsp;accessing&nbsp;deferred&nbsp;fields&nbsp;of&nbsp;an&nbsp;instance,&nbsp;the&nbsp;deferred&nbsp;loading<br>
+of&nbsp;the&nbsp;field&nbsp;will&nbsp;call&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="Food-save"><strong>save</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Save&nbsp;the&nbsp;current&nbsp;instance.&nbsp;Override&nbsp;this&nbsp;in&nbsp;a&nbsp;subclass&nbsp;if&nbsp;you&nbsp;want&nbsp;to<br>
+control&nbsp;the&nbsp;saving&nbsp;process.<br>
+&nbsp;<br>
+The&nbsp;'force_insert'&nbsp;and&nbsp;'force_update'&nbsp;parameters&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;insist<br>
+that&nbsp;the&nbsp;"save"&nbsp;must&nbsp;be&nbsp;an&nbsp;SQL&nbsp;insert&nbsp;or&nbsp;update&nbsp;(or&nbsp;equivalent&nbsp;for<br>
+non-SQL&nbsp;backends),&nbsp;respectively.&nbsp;Normally,&nbsp;they&nbsp;should&nbsp;not&nbsp;be&nbsp;set.</span></dd></dl>
+
+<dl><dt><a name="Food-save_base"><strong>save_base</strong></a>(self, raw=False, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Handle&nbsp;the&nbsp;parts&nbsp;of&nbsp;saving&nbsp;which&nbsp;should&nbsp;be&nbsp;done&nbsp;only&nbsp;once&nbsp;per&nbsp;save,<br>
+yet&nbsp;need&nbsp;to&nbsp;be&nbsp;done&nbsp;in&nbsp;raw&nbsp;saves,&nbsp;too.&nbsp;This&nbsp;includes&nbsp;some&nbsp;sanity<br>
+checks&nbsp;and&nbsp;signal&nbsp;sending.<br>
+&nbsp;<br>
+The&nbsp;'raw'&nbsp;argument&nbsp;is&nbsp;telling&nbsp;save_base&nbsp;not&nbsp;to&nbsp;save&nbsp;any&nbsp;parent<br>
+models&nbsp;and&nbsp;not&nbsp;to&nbsp;do&nbsp;any&nbsp;changes&nbsp;to&nbsp;the&nbsp;values&nbsp;before&nbsp;save.&nbsp;This<br>
+is&nbsp;used&nbsp;by&nbsp;fixture&nbsp;loading.</span></dd></dl>
+
+<dl><dt><a name="Food-serializable_value"><strong>serializable_value</strong></a>(self, field_name)</dt><dd><span class="code">Return&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;field&nbsp;name&nbsp;for&nbsp;this&nbsp;instance.&nbsp;If&nbsp;the&nbsp;field&nbsp;is<br>
+a&nbsp;foreign&nbsp;key,&nbsp;return&nbsp;the&nbsp;id&nbsp;value&nbsp;instead&nbsp;of&nbsp;the&nbsp;object.&nbsp;If&nbsp;there's<br>
+no&nbsp;Field&nbsp;object&nbsp;with&nbsp;this&nbsp;name&nbsp;on&nbsp;the&nbsp;model,&nbsp;return&nbsp;the&nbsp;model<br>
+attribute's&nbsp;value.<br>
+&nbsp;<br>
+Used&nbsp;to&nbsp;serialize&nbsp;a&nbsp;field's&nbsp;value&nbsp;(in&nbsp;the&nbsp;serializer,&nbsp;or&nbsp;form&nbsp;output,<br>
+for&nbsp;example).&nbsp;Normally,&nbsp;you&nbsp;would&nbsp;just&nbsp;access&nbsp;the&nbsp;attribute&nbsp;directly<br>
+and&nbsp;not&nbsp;use&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="Food-unique_error_message"><strong>unique_error_message</strong></a>(self, model_class, unique_check)</dt></dl>
+
+<dl><dt><a name="Food-validate_constraints"><strong>validate_constraints</strong></a>(self, exclude=None)</dt></dl>
+
+<dl><dt><a name="Food-validate_unique"><strong>validate_unique</strong></a>(self, exclude=None)</dt><dd><span class="code">Check&nbsp;unique&nbsp;constraints&nbsp;on&nbsp;the&nbsp;model&nbsp;and&nbsp;raise&nbsp;ValidationError&nbsp;if&nbsp;any<br>
+failed.</span></dd></dl>
+
+<hr>
+Class methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="Food-check"><strong>check</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<dl><dt><a name="Food-from_db"><strong>from_db</strong></a>(db, field_names, values)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><strong>pk</strong></dt>
+</dl>
+<hr>
+Class methods inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><a name="Food-__init_subclass__"><strong>__init_subclass__</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt><dd><span class="code">This&nbsp;method&nbsp;is&nbsp;called&nbsp;when&nbsp;a&nbsp;class&nbsp;is&nbsp;subclassed.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;implementation&nbsp;does&nbsp;nothing.&nbsp;It&nbsp;may&nbsp;be<br>
+overridden&nbsp;to&nbsp;extend&nbsp;subclasses.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="FoodLog">class <strong>FoodLog</strong></a>(<a href="django.db.models.base.html#Model">django.db.models.base.Model</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#FoodLog">FoodLog</a>(*args,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Class&nbsp;Name:&nbsp;<a href="#FoodLog">FoodLog</a><br>
+Programmer:&nbsp;Jared&nbsp;Jasso<br>
+&nbsp;<br>
+Represents&nbsp;a&nbsp;food&nbsp;log&nbsp;for&nbsp;a&nbsp;user&nbsp;of&nbsp;a&nbsp;specific&nbsp;date.&nbsp;It&nbsp;uses&nbsp;a&nbsp;one&nbsp;to&nbsp;many&nbsp;relationship&nbsp;with&nbsp;profile.&nbsp;<br>
+It&nbsp;also&nbsp;stores&nbsp;the&nbsp;date&nbsp;of&nbsp;the&nbsp;log,&nbsp;and&nbsp;maintains&nbsp;a&nbsp;many-to-many&nbsp;relationship&nbsp;with&nbsp;the&nbsp;<a href="#Food">Food</a>&nbsp;model&nbsp;<br>
+through&nbsp;the&nbsp;<a href="#FoodLogEntry">FoodLogEntry</a>&nbsp;model.&nbsp;<br>
+&nbsp;<br>
+The&nbsp;"calculateTotalCalories"&nbsp;method&nbsp;calculates&nbsp;the&nbsp;total&nbsp;calories&nbsp;consumed&nbsp;in&nbsp;the&nbsp;food&nbsp;log&nbsp;using&nbsp;<br>
+the&nbsp;<a href="#FoodLogEntry">FoodLogEntry</a>&nbsp;model.<br>
+&nbsp;<br>
+The&nbsp;"__str__"&nbsp;method&nbsp;returns&nbsp;a&nbsp;readable&nbsp;string&nbsp;of&nbsp;user&nbsp;name&nbsp;and&nbsp;date&nbsp;of&nbsp;foodlog.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="app.models.html#FoodLog">FoodLog</a></dd>
+<dd><a href="django.db.models.base.html#Model">django.db.models.base.Model</a></dd>
+<dd><a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FoodLog-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<dl><dt><a name="FoodLog-calculateTotalCalories"><strong>calculateTotalCalories</strong></a>(self)</dt></dl>
+
+<strong>date</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<dl><dt><a name="FoodLog-get_next_by_date"><strong>get_next_by_date</strong></a> = _method(self, *, field=&lt;django.db.models.fields.DateField: date&gt;, is_next=True, **kwargs)</dt></dl>
+
+<dl><dt><a name="FoodLog-get_previous_by_date"><strong>get_previous_by_date</strong></a> = _method(self, *, field=&lt;django.db.models.fields.DateField: date&gt;, is_next=False, **kwargs)</dt></dl>
+
+<strong>id</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>foodlogentry_set</strong></dt>
+</dl>
+<dl><dt><strong>foods</strong></dt>
+</dl>
+<dl><dt><strong>profile</strong></dt>
+</dl>
+<dl><dt><strong>profile_id</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>DoesNotExist</strong> = &lt;class 'app.models.FoodLog.DoesNotExist'&gt;</dl>
+
+<dl><dt><strong>MultipleObjectsReturned</strong> = &lt;class 'app.models.FoodLog.MultipleObjectsReturned'&gt;</dl>
+
+<dl><dt><strong>objects</strong> = &lt;django.db.models.manager.Manager object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="FoodLog-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><span class="code">Return&nbsp;self==value.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-__getstate__"><strong>__getstate__</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;to&nbsp;allow&nbsp;choosing&nbsp;the&nbsp;attributes&nbsp;to&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="FoodLog-__init__"><strong>__init__</strong></a>(self, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-__reduce__"><strong>__reduce__</strong></a>(self)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<dl><dt><a name="FoodLog-__setstate__"><strong>__setstate__</strong></a>(self, state)</dt></dl>
+
+<dl><dt>async <a name="FoodLog-adelete"><strong>adelete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt>async <a name="FoodLog-arefresh_from_db"><strong>arefresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt></dl>
+
+<dl><dt>async <a name="FoodLog-asave"><strong>asave</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">#&nbsp;RemovedInDjango60Warning:&nbsp;When&nbsp;the&nbsp;deprecation&nbsp;ends,&nbsp;replace&nbsp;with:<br>
+#&nbsp;async&nbsp;def&nbsp;<a href="#FoodLog-asave">asave</a>(<br>
+#&nbsp;&nbsp;&nbsp;self,&nbsp;*,&nbsp;force_insert=False,&nbsp;force_update=False,&nbsp;using=None,&nbsp;update_fields=None,<br>
+#&nbsp;):</span></dd></dl>
+
+<dl><dt><a name="FoodLog-clean"><strong>clean</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;for&nbsp;doing&nbsp;any&nbsp;extra&nbsp;model-wide&nbsp;validation&nbsp;after&nbsp;<a href="#FoodLog-clean">clean</a>()&nbsp;has&nbsp;been<br>
+called&nbsp;on&nbsp;every&nbsp;field&nbsp;by&nbsp;self.<strong>clean_fields</strong>.&nbsp;Any&nbsp;ValidationError&nbsp;raised<br>
+by&nbsp;this&nbsp;method&nbsp;will&nbsp;not&nbsp;be&nbsp;associated&nbsp;with&nbsp;a&nbsp;particular&nbsp;field;&nbsp;it&nbsp;will<br>
+have&nbsp;a&nbsp;special-case&nbsp;association&nbsp;with&nbsp;the&nbsp;field&nbsp;defined&nbsp;by&nbsp;NON_FIELD_ERRORS.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-clean_fields"><strong>clean_fields</strong></a>(self, exclude=None)</dt><dd><span class="code">Clean&nbsp;all&nbsp;fields&nbsp;and&nbsp;raise&nbsp;a&nbsp;ValidationError&nbsp;containing&nbsp;a&nbsp;dict<br>
+of&nbsp;all&nbsp;validation&nbsp;errors&nbsp;if&nbsp;any&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-date_error_message"><strong>date_error_message</strong></a>(self, lookup_type, field_name, unique_for)</dt></dl>
+
+<dl><dt><a name="FoodLog-delete"><strong>delete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt><a name="FoodLog-full_clean"><strong>full_clean</strong></a>(self, exclude=None, validate_unique=True, validate_constraints=True)</dt><dd><span class="code">Call&nbsp;<a href="#FoodLog-clean_fields">clean_fields</a>(),&nbsp;<a href="#FoodLog-clean">clean</a>(),&nbsp;<a href="#FoodLog-validate_unique">validate_unique</a>(),&nbsp;and<br>
+<a href="#FoodLog-validate_constraints">validate_constraints</a>()&nbsp;on&nbsp;the&nbsp;model.&nbsp;Raise&nbsp;a&nbsp;ValidationError&nbsp;for&nbsp;any<br>
+errors&nbsp;that&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-get_constraints"><strong>get_constraints</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FoodLog-get_deferred_fields"><strong>get_deferred_fields</strong></a>(self)</dt><dd><span class="code">Return&nbsp;a&nbsp;set&nbsp;containing&nbsp;names&nbsp;of&nbsp;deferred&nbsp;fields&nbsp;for&nbsp;this&nbsp;instance.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-prepare_database_save"><strong>prepare_database_save</strong></a>(self, field)</dt></dl>
+
+<dl><dt><a name="FoodLog-refresh_from_db"><strong>refresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt><dd><span class="code">Reload&nbsp;field&nbsp;values&nbsp;from&nbsp;the&nbsp;database.<br>
+&nbsp;<br>
+By&nbsp;default,&nbsp;the&nbsp;reloading&nbsp;happens&nbsp;from&nbsp;the&nbsp;database&nbsp;this&nbsp;instance&nbsp;was<br>
+loaded&nbsp;from,&nbsp;or&nbsp;by&nbsp;the&nbsp;read&nbsp;router&nbsp;if&nbsp;this&nbsp;instance&nbsp;wasn't&nbsp;loaded&nbsp;from<br>
+any&nbsp;database.&nbsp;The&nbsp;using&nbsp;parameter&nbsp;will&nbsp;override&nbsp;the&nbsp;default.<br>
+&nbsp;<br>
+Fields&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;specify&nbsp;which&nbsp;fields&nbsp;to&nbsp;reload.&nbsp;The&nbsp;fields<br>
+should&nbsp;be&nbsp;an&nbsp;iterable&nbsp;of&nbsp;field&nbsp;attnames.&nbsp;If&nbsp;fields&nbsp;is&nbsp;None,&nbsp;then<br>
+all&nbsp;non-deferred&nbsp;fields&nbsp;are&nbsp;reloaded.<br>
+&nbsp;<br>
+When&nbsp;accessing&nbsp;deferred&nbsp;fields&nbsp;of&nbsp;an&nbsp;instance,&nbsp;the&nbsp;deferred&nbsp;loading<br>
+of&nbsp;the&nbsp;field&nbsp;will&nbsp;call&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-save"><strong>save</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Save&nbsp;the&nbsp;current&nbsp;instance.&nbsp;Override&nbsp;this&nbsp;in&nbsp;a&nbsp;subclass&nbsp;if&nbsp;you&nbsp;want&nbsp;to<br>
+control&nbsp;the&nbsp;saving&nbsp;process.<br>
+&nbsp;<br>
+The&nbsp;'force_insert'&nbsp;and&nbsp;'force_update'&nbsp;parameters&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;insist<br>
+that&nbsp;the&nbsp;"save"&nbsp;must&nbsp;be&nbsp;an&nbsp;SQL&nbsp;insert&nbsp;or&nbsp;update&nbsp;(or&nbsp;equivalent&nbsp;for<br>
+non-SQL&nbsp;backends),&nbsp;respectively.&nbsp;Normally,&nbsp;they&nbsp;should&nbsp;not&nbsp;be&nbsp;set.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-save_base"><strong>save_base</strong></a>(self, raw=False, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Handle&nbsp;the&nbsp;parts&nbsp;of&nbsp;saving&nbsp;which&nbsp;should&nbsp;be&nbsp;done&nbsp;only&nbsp;once&nbsp;per&nbsp;save,<br>
+yet&nbsp;need&nbsp;to&nbsp;be&nbsp;done&nbsp;in&nbsp;raw&nbsp;saves,&nbsp;too.&nbsp;This&nbsp;includes&nbsp;some&nbsp;sanity<br>
+checks&nbsp;and&nbsp;signal&nbsp;sending.<br>
+&nbsp;<br>
+The&nbsp;'raw'&nbsp;argument&nbsp;is&nbsp;telling&nbsp;save_base&nbsp;not&nbsp;to&nbsp;save&nbsp;any&nbsp;parent<br>
+models&nbsp;and&nbsp;not&nbsp;to&nbsp;do&nbsp;any&nbsp;changes&nbsp;to&nbsp;the&nbsp;values&nbsp;before&nbsp;save.&nbsp;This<br>
+is&nbsp;used&nbsp;by&nbsp;fixture&nbsp;loading.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-serializable_value"><strong>serializable_value</strong></a>(self, field_name)</dt><dd><span class="code">Return&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;field&nbsp;name&nbsp;for&nbsp;this&nbsp;instance.&nbsp;If&nbsp;the&nbsp;field&nbsp;is<br>
+a&nbsp;foreign&nbsp;key,&nbsp;return&nbsp;the&nbsp;id&nbsp;value&nbsp;instead&nbsp;of&nbsp;the&nbsp;object.&nbsp;If&nbsp;there's<br>
+no&nbsp;Field&nbsp;object&nbsp;with&nbsp;this&nbsp;name&nbsp;on&nbsp;the&nbsp;model,&nbsp;return&nbsp;the&nbsp;model<br>
+attribute's&nbsp;value.<br>
+&nbsp;<br>
+Used&nbsp;to&nbsp;serialize&nbsp;a&nbsp;field's&nbsp;value&nbsp;(in&nbsp;the&nbsp;serializer,&nbsp;or&nbsp;form&nbsp;output,<br>
+for&nbsp;example).&nbsp;Normally,&nbsp;you&nbsp;would&nbsp;just&nbsp;access&nbsp;the&nbsp;attribute&nbsp;directly<br>
+and&nbsp;not&nbsp;use&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="FoodLog-unique_error_message"><strong>unique_error_message</strong></a>(self, model_class, unique_check)</dt></dl>
+
+<dl><dt><a name="FoodLog-validate_constraints"><strong>validate_constraints</strong></a>(self, exclude=None)</dt></dl>
+
+<dl><dt><a name="FoodLog-validate_unique"><strong>validate_unique</strong></a>(self, exclude=None)</dt><dd><span class="code">Check&nbsp;unique&nbsp;constraints&nbsp;on&nbsp;the&nbsp;model&nbsp;and&nbsp;raise&nbsp;ValidationError&nbsp;if&nbsp;any<br>
+failed.</span></dd></dl>
+
+<hr>
+Class methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="FoodLog-check"><strong>check</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<dl><dt><a name="FoodLog-from_db"><strong>from_db</strong></a>(db, field_names, values)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><strong>pk</strong></dt>
+</dl>
+<hr>
+Class methods inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><a name="FoodLog-__init_subclass__"><strong>__init_subclass__</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt><dd><span class="code">This&nbsp;method&nbsp;is&nbsp;called&nbsp;when&nbsp;a&nbsp;class&nbsp;is&nbsp;subclassed.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;implementation&nbsp;does&nbsp;nothing.&nbsp;It&nbsp;may&nbsp;be<br>
+overridden&nbsp;to&nbsp;extend&nbsp;subclasses.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="FoodLogEntry">class <strong>FoodLogEntry</strong></a>(<a href="django.db.models.base.html#Model">django.db.models.base.Model</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#FoodLogEntry">FoodLogEntry</a>(*args,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Class&nbsp;Name:&nbsp;<a href="#FoodLogEntry">FoodLogEntry</a><br>
+Programmer:&nbsp;Jared&nbsp;Jasso<br>
+&nbsp;<br>
+Represents&nbsp;a&nbsp;single&nbsp;food&nbsp;item&nbsp;that&nbsp;has&nbsp;been&nbsp;entered&nbsp;into&nbsp;a&nbsp;food&nbsp;log.&nbsp;<br>
+&nbsp;<br>
+It&nbsp;has&nbsp;a&nbsp;many&nbsp;to&nbsp;one&nbsp;relationship&nbsp;with&nbsp;the&nbsp;<a href="#FoodLog">FoodLog</a>&nbsp;model&nbsp;and&nbsp;the&nbsp;<a href="#Food">Food</a>&nbsp;model.<br>
+If&nbsp;the&nbsp;food&nbsp;log&nbsp;or&nbsp;food&nbsp;item&nbsp;is&nbsp;deleted,&nbsp;the&nbsp;corresponding&nbsp;food&nbsp;log&nbsp;entry&nbsp;will&nbsp;also&nbsp;be&nbsp;deleted.<br>
+&nbsp;<br>
+The&nbsp;float&nbsp;field&nbsp;represents&nbsp;the&nbsp;quantity&nbsp;of&nbsp;the&nbsp;food&nbsp;item&nbsp;consumed.<br>
+&nbsp;<br>
+The&nbsp;"calculateCalories"&nbsp;method&nbsp;calculates&nbsp;the&nbsp;total&nbsp;calories&nbsp;for&nbsp;the&nbsp;food&nbsp;item&nbsp;<br>
+based&nbsp;on&nbsp;its&nbsp;quantity.<br>
+&nbsp;<br>
+The&nbsp;"__str__"&nbsp;method&nbsp;returns&nbsp;a&nbsp;readable&nbsp;string&nbsp;of&nbsp;the&nbsp;food&nbsp;name&nbsp;and&nbsp;quantity.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="app.models.html#FoodLogEntry">FoodLogEntry</a></dd>
+<dd><a href="django.db.models.base.html#Model">django.db.models.base.Model</a></dd>
+<dd><a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FoodLogEntry-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-calculateCalories"><strong>calculateCalories</strong></a>(self)</dt></dl>
+
+<strong>id</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>quantity</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>food</strong></dt>
+</dl>
+<dl><dt><strong>foodLog</strong></dt>
+</dl>
+<dl><dt><strong>foodLog_id</strong></dt>
+</dl>
+<dl><dt><strong>food_id</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>DoesNotExist</strong> = &lt;class 'app.models.FoodLogEntry.DoesNotExist'&gt;</dl>
+
+<dl><dt><strong>MultipleObjectsReturned</strong> = &lt;class 'app.models.FoodLogEntry.MultipleObjectsReturned'&gt;</dl>
+
+<dl><dt><strong>objects</strong> = &lt;django.db.models.manager.Manager object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="FoodLogEntry-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><span class="code">Return&nbsp;self==value.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-__getstate__"><strong>__getstate__</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;to&nbsp;allow&nbsp;choosing&nbsp;the&nbsp;attributes&nbsp;to&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-__init__"><strong>__init__</strong></a>(self, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-__reduce__"><strong>__reduce__</strong></a>(self)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-__setstate__"><strong>__setstate__</strong></a>(self, state)</dt></dl>
+
+<dl><dt>async <a name="FoodLogEntry-adelete"><strong>adelete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt>async <a name="FoodLogEntry-arefresh_from_db"><strong>arefresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt></dl>
+
+<dl><dt>async <a name="FoodLogEntry-asave"><strong>asave</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">#&nbsp;RemovedInDjango60Warning:&nbsp;When&nbsp;the&nbsp;deprecation&nbsp;ends,&nbsp;replace&nbsp;with:<br>
+#&nbsp;async&nbsp;def&nbsp;<a href="#FoodLogEntry-asave">asave</a>(<br>
+#&nbsp;&nbsp;&nbsp;self,&nbsp;*,&nbsp;force_insert=False,&nbsp;force_update=False,&nbsp;using=None,&nbsp;update_fields=None,<br>
+#&nbsp;):</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-clean"><strong>clean</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;for&nbsp;doing&nbsp;any&nbsp;extra&nbsp;model-wide&nbsp;validation&nbsp;after&nbsp;<a href="#FoodLogEntry-clean">clean</a>()&nbsp;has&nbsp;been<br>
+called&nbsp;on&nbsp;every&nbsp;field&nbsp;by&nbsp;self.<strong>clean_fields</strong>.&nbsp;Any&nbsp;ValidationError&nbsp;raised<br>
+by&nbsp;this&nbsp;method&nbsp;will&nbsp;not&nbsp;be&nbsp;associated&nbsp;with&nbsp;a&nbsp;particular&nbsp;field;&nbsp;it&nbsp;will<br>
+have&nbsp;a&nbsp;special-case&nbsp;association&nbsp;with&nbsp;the&nbsp;field&nbsp;defined&nbsp;by&nbsp;NON_FIELD_ERRORS.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-clean_fields"><strong>clean_fields</strong></a>(self, exclude=None)</dt><dd><span class="code">Clean&nbsp;all&nbsp;fields&nbsp;and&nbsp;raise&nbsp;a&nbsp;ValidationError&nbsp;containing&nbsp;a&nbsp;dict<br>
+of&nbsp;all&nbsp;validation&nbsp;errors&nbsp;if&nbsp;any&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-date_error_message"><strong>date_error_message</strong></a>(self, lookup_type, field_name, unique_for)</dt></dl>
+
+<dl><dt><a name="FoodLogEntry-delete"><strong>delete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt><a name="FoodLogEntry-full_clean"><strong>full_clean</strong></a>(self, exclude=None, validate_unique=True, validate_constraints=True)</dt><dd><span class="code">Call&nbsp;<a href="#FoodLogEntry-clean_fields">clean_fields</a>(),&nbsp;<a href="#FoodLogEntry-clean">clean</a>(),&nbsp;<a href="#FoodLogEntry-validate_unique">validate_unique</a>(),&nbsp;and<br>
+<a href="#FoodLogEntry-validate_constraints">validate_constraints</a>()&nbsp;on&nbsp;the&nbsp;model.&nbsp;Raise&nbsp;a&nbsp;ValidationError&nbsp;for&nbsp;any<br>
+errors&nbsp;that&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-get_constraints"><strong>get_constraints</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FoodLogEntry-get_deferred_fields"><strong>get_deferred_fields</strong></a>(self)</dt><dd><span class="code">Return&nbsp;a&nbsp;set&nbsp;containing&nbsp;names&nbsp;of&nbsp;deferred&nbsp;fields&nbsp;for&nbsp;this&nbsp;instance.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-prepare_database_save"><strong>prepare_database_save</strong></a>(self, field)</dt></dl>
+
+<dl><dt><a name="FoodLogEntry-refresh_from_db"><strong>refresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt><dd><span class="code">Reload&nbsp;field&nbsp;values&nbsp;from&nbsp;the&nbsp;database.<br>
+&nbsp;<br>
+By&nbsp;default,&nbsp;the&nbsp;reloading&nbsp;happens&nbsp;from&nbsp;the&nbsp;database&nbsp;this&nbsp;instance&nbsp;was<br>
+loaded&nbsp;from,&nbsp;or&nbsp;by&nbsp;the&nbsp;read&nbsp;router&nbsp;if&nbsp;this&nbsp;instance&nbsp;wasn't&nbsp;loaded&nbsp;from<br>
+any&nbsp;database.&nbsp;The&nbsp;using&nbsp;parameter&nbsp;will&nbsp;override&nbsp;the&nbsp;default.<br>
+&nbsp;<br>
+Fields&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;specify&nbsp;which&nbsp;fields&nbsp;to&nbsp;reload.&nbsp;The&nbsp;fields<br>
+should&nbsp;be&nbsp;an&nbsp;iterable&nbsp;of&nbsp;field&nbsp;attnames.&nbsp;If&nbsp;fields&nbsp;is&nbsp;None,&nbsp;then<br>
+all&nbsp;non-deferred&nbsp;fields&nbsp;are&nbsp;reloaded.<br>
+&nbsp;<br>
+When&nbsp;accessing&nbsp;deferred&nbsp;fields&nbsp;of&nbsp;an&nbsp;instance,&nbsp;the&nbsp;deferred&nbsp;loading<br>
+of&nbsp;the&nbsp;field&nbsp;will&nbsp;call&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-save"><strong>save</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Save&nbsp;the&nbsp;current&nbsp;instance.&nbsp;Override&nbsp;this&nbsp;in&nbsp;a&nbsp;subclass&nbsp;if&nbsp;you&nbsp;want&nbsp;to<br>
+control&nbsp;the&nbsp;saving&nbsp;process.<br>
+&nbsp;<br>
+The&nbsp;'force_insert'&nbsp;and&nbsp;'force_update'&nbsp;parameters&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;insist<br>
+that&nbsp;the&nbsp;"save"&nbsp;must&nbsp;be&nbsp;an&nbsp;SQL&nbsp;insert&nbsp;or&nbsp;update&nbsp;(or&nbsp;equivalent&nbsp;for<br>
+non-SQL&nbsp;backends),&nbsp;respectively.&nbsp;Normally,&nbsp;they&nbsp;should&nbsp;not&nbsp;be&nbsp;set.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-save_base"><strong>save_base</strong></a>(self, raw=False, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Handle&nbsp;the&nbsp;parts&nbsp;of&nbsp;saving&nbsp;which&nbsp;should&nbsp;be&nbsp;done&nbsp;only&nbsp;once&nbsp;per&nbsp;save,<br>
+yet&nbsp;need&nbsp;to&nbsp;be&nbsp;done&nbsp;in&nbsp;raw&nbsp;saves,&nbsp;too.&nbsp;This&nbsp;includes&nbsp;some&nbsp;sanity<br>
+checks&nbsp;and&nbsp;signal&nbsp;sending.<br>
+&nbsp;<br>
+The&nbsp;'raw'&nbsp;argument&nbsp;is&nbsp;telling&nbsp;save_base&nbsp;not&nbsp;to&nbsp;save&nbsp;any&nbsp;parent<br>
+models&nbsp;and&nbsp;not&nbsp;to&nbsp;do&nbsp;any&nbsp;changes&nbsp;to&nbsp;the&nbsp;values&nbsp;before&nbsp;save.&nbsp;This<br>
+is&nbsp;used&nbsp;by&nbsp;fixture&nbsp;loading.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-serializable_value"><strong>serializable_value</strong></a>(self, field_name)</dt><dd><span class="code">Return&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;field&nbsp;name&nbsp;for&nbsp;this&nbsp;instance.&nbsp;If&nbsp;the&nbsp;field&nbsp;is<br>
+a&nbsp;foreign&nbsp;key,&nbsp;return&nbsp;the&nbsp;id&nbsp;value&nbsp;instead&nbsp;of&nbsp;the&nbsp;object.&nbsp;If&nbsp;there's<br>
+no&nbsp;Field&nbsp;object&nbsp;with&nbsp;this&nbsp;name&nbsp;on&nbsp;the&nbsp;model,&nbsp;return&nbsp;the&nbsp;model<br>
+attribute's&nbsp;value.<br>
+&nbsp;<br>
+Used&nbsp;to&nbsp;serialize&nbsp;a&nbsp;field's&nbsp;value&nbsp;(in&nbsp;the&nbsp;serializer,&nbsp;or&nbsp;form&nbsp;output,<br>
+for&nbsp;example).&nbsp;Normally,&nbsp;you&nbsp;would&nbsp;just&nbsp;access&nbsp;the&nbsp;attribute&nbsp;directly<br>
+and&nbsp;not&nbsp;use&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="FoodLogEntry-unique_error_message"><strong>unique_error_message</strong></a>(self, model_class, unique_check)</dt></dl>
+
+<dl><dt><a name="FoodLogEntry-validate_constraints"><strong>validate_constraints</strong></a>(self, exclude=None)</dt></dl>
+
+<dl><dt><a name="FoodLogEntry-validate_unique"><strong>validate_unique</strong></a>(self, exclude=None)</dt><dd><span class="code">Check&nbsp;unique&nbsp;constraints&nbsp;on&nbsp;the&nbsp;model&nbsp;and&nbsp;raise&nbsp;ValidationError&nbsp;if&nbsp;any<br>
+failed.</span></dd></dl>
+
+<hr>
+Class methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="FoodLogEntry-check"><strong>check</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<dl><dt><a name="FoodLogEntry-from_db"><strong>from_db</strong></a>(db, field_names, values)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><strong>pk</strong></dt>
+</dl>
+<hr>
+Class methods inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><a name="FoodLogEntry-__init_subclass__"><strong>__init_subclass__</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt><dd><span class="code">This&nbsp;method&nbsp;is&nbsp;called&nbsp;when&nbsp;a&nbsp;class&nbsp;is&nbsp;subclassed.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;implementation&nbsp;does&nbsp;nothing.&nbsp;It&nbsp;may&nbsp;be<br>
+overridden&nbsp;to&nbsp;extend&nbsp;subclasses.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Profile">class <strong>Profile</strong></a>(<a href="django.db.models.base.html#Model">django.db.models.base.Model</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Profile">Profile</a>(*args,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Class&nbsp;Name:&nbsp;<a href="#Profile">Profile</a><br>
+Programmer:&nbsp;Jared&nbsp;Jasso<br>
+&nbsp;<br>
+It&nbsp;has&nbsp;a&nbsp;one-to-one&nbsp;relationship&nbsp;with&nbsp;the&nbsp;<a href="#User">User</a>&nbsp;model,&nbsp;meaning&nbsp;each&nbsp;user&nbsp;can&nbsp;have&nbsp;only&nbsp;one&nbsp;profile<br>
+and&nbsp;if&nbsp;the&nbsp;user&nbsp;is&nbsp;deleted,&nbsp;the&nbsp;profile&nbsp;will&nbsp;also&nbsp;be&nbsp;deleted.<br>
+&nbsp;<br>
+Stores&nbsp;more&nbsp;detailed&nbsp;information&nbsp;about&nbsp;the&nbsp;user&nbsp;such&nbsp;as&nbsp;weight,&nbsp;height,&nbsp;age,&nbsp;sex,&nbsp;activity&nbsp;levels,&nbsp;and&nbsp;<br>
+fitness&nbsp;goals.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="app.models.html#Profile">Profile</a></dd>
+<dd><a href="django.db.models.base.html#Model">django.db.models.base.Model</a></dd>
+<dd><a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<strong>activityLevels</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>age</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>fitnessGoals</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<dl><dt><a name="Profile-get_activityLevels_display"><strong>get_activityLevels_display</strong></a> = _method(self, *, field=&lt;django.db.models.fields.CharField: activityLevels&gt;)</dt></dl>
+
+<dl><dt><a name="Profile-get_fitnessGoals_display"><strong>get_fitnessGoals_display</strong></a> = _method(self, *, field=&lt;django.db.models.fields.CharField: fitnessGoals&gt;)</dt></dl>
+
+<dl><dt><a name="Profile-get_sex_display"><strong>get_sex_display</strong></a> = _method(self, *, field=&lt;django.db.models.fields.CharField: sex&gt;)</dt></dl>
+
+<strong>height</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>id</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>sex</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>weight</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>foodlog_set</strong></dt>
+</dl>
+<dl><dt><strong>targetcalories</strong></dt>
+</dl>
+<dl><dt><strong>user</strong></dt>
+</dl>
+<dl><dt><strong>user_id</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>DoesNotExist</strong> = &lt;class 'app.models.Profile.DoesNotExist'&gt;</dl>
+
+<dl><dt><strong>MultipleObjectsReturned</strong> = &lt;class 'app.models.Profile.MultipleObjectsReturned'&gt;</dl>
+
+<dl><dt><strong>activityLevelChoices</strong> = [('Sedentary', 'Sedentary'), ('Lightly Active', 'Lightly Active'), ('Moderately Active', 'Moderately Active'), ('Very Active', 'Very Active')]</dl>
+
+<dl><dt><strong>fitnessGoalChoices</strong> = [('Lose Weight', 'Lose Weight'), ('Maintain Weight', 'Maintain Weight'), ('Gain Weight', 'Gain Weight')]</dl>
+
+<dl><dt><strong>objects</strong> = &lt;django.db.models.manager.Manager object&gt;</dl>
+
+<dl><dt><strong>sexChoices</strong> = [('Male', 'Male'), ('Female', 'Female')]</dl>
+
+<hr>
+Methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="Profile-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><span class="code">Return&nbsp;self==value.</span></dd></dl>
+
+<dl><dt><a name="Profile-__getstate__"><strong>__getstate__</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;to&nbsp;allow&nbsp;choosing&nbsp;the&nbsp;attributes&nbsp;to&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="Profile-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="Profile-__init__"><strong>__init__</strong></a>(self, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="Profile-__reduce__"><strong>__reduce__</strong></a>(self)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="Profile-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<dl><dt><a name="Profile-__setstate__"><strong>__setstate__</strong></a>(self, state)</dt></dl>
+
+<dl><dt><a name="Profile-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<dl><dt>async <a name="Profile-adelete"><strong>adelete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt>async <a name="Profile-arefresh_from_db"><strong>arefresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt></dl>
+
+<dl><dt>async <a name="Profile-asave"><strong>asave</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">#&nbsp;RemovedInDjango60Warning:&nbsp;When&nbsp;the&nbsp;deprecation&nbsp;ends,&nbsp;replace&nbsp;with:<br>
+#&nbsp;async&nbsp;def&nbsp;<a href="#Profile-asave">asave</a>(<br>
+#&nbsp;&nbsp;&nbsp;self,&nbsp;*,&nbsp;force_insert=False,&nbsp;force_update=False,&nbsp;using=None,&nbsp;update_fields=None,<br>
+#&nbsp;):</span></dd></dl>
+
+<dl><dt><a name="Profile-clean"><strong>clean</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;for&nbsp;doing&nbsp;any&nbsp;extra&nbsp;model-wide&nbsp;validation&nbsp;after&nbsp;<a href="#Profile-clean">clean</a>()&nbsp;has&nbsp;been<br>
+called&nbsp;on&nbsp;every&nbsp;field&nbsp;by&nbsp;self.<strong>clean_fields</strong>.&nbsp;Any&nbsp;ValidationError&nbsp;raised<br>
+by&nbsp;this&nbsp;method&nbsp;will&nbsp;not&nbsp;be&nbsp;associated&nbsp;with&nbsp;a&nbsp;particular&nbsp;field;&nbsp;it&nbsp;will<br>
+have&nbsp;a&nbsp;special-case&nbsp;association&nbsp;with&nbsp;the&nbsp;field&nbsp;defined&nbsp;by&nbsp;NON_FIELD_ERRORS.</span></dd></dl>
+
+<dl><dt><a name="Profile-clean_fields"><strong>clean_fields</strong></a>(self, exclude=None)</dt><dd><span class="code">Clean&nbsp;all&nbsp;fields&nbsp;and&nbsp;raise&nbsp;a&nbsp;ValidationError&nbsp;containing&nbsp;a&nbsp;dict<br>
+of&nbsp;all&nbsp;validation&nbsp;errors&nbsp;if&nbsp;any&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="Profile-date_error_message"><strong>date_error_message</strong></a>(self, lookup_type, field_name, unique_for)</dt></dl>
+
+<dl><dt><a name="Profile-delete"><strong>delete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt><a name="Profile-full_clean"><strong>full_clean</strong></a>(self, exclude=None, validate_unique=True, validate_constraints=True)</dt><dd><span class="code">Call&nbsp;<a href="#Profile-clean_fields">clean_fields</a>(),&nbsp;<a href="#Profile-clean">clean</a>(),&nbsp;<a href="#Profile-validate_unique">validate_unique</a>(),&nbsp;and<br>
+<a href="#Profile-validate_constraints">validate_constraints</a>()&nbsp;on&nbsp;the&nbsp;model.&nbsp;Raise&nbsp;a&nbsp;ValidationError&nbsp;for&nbsp;any<br>
+errors&nbsp;that&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="Profile-get_constraints"><strong>get_constraints</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Profile-get_deferred_fields"><strong>get_deferred_fields</strong></a>(self)</dt><dd><span class="code">Return&nbsp;a&nbsp;set&nbsp;containing&nbsp;names&nbsp;of&nbsp;deferred&nbsp;fields&nbsp;for&nbsp;this&nbsp;instance.</span></dd></dl>
+
+<dl><dt><a name="Profile-prepare_database_save"><strong>prepare_database_save</strong></a>(self, field)</dt></dl>
+
+<dl><dt><a name="Profile-refresh_from_db"><strong>refresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt><dd><span class="code">Reload&nbsp;field&nbsp;values&nbsp;from&nbsp;the&nbsp;database.<br>
+&nbsp;<br>
+By&nbsp;default,&nbsp;the&nbsp;reloading&nbsp;happens&nbsp;from&nbsp;the&nbsp;database&nbsp;this&nbsp;instance&nbsp;was<br>
+loaded&nbsp;from,&nbsp;or&nbsp;by&nbsp;the&nbsp;read&nbsp;router&nbsp;if&nbsp;this&nbsp;instance&nbsp;wasn't&nbsp;loaded&nbsp;from<br>
+any&nbsp;database.&nbsp;The&nbsp;using&nbsp;parameter&nbsp;will&nbsp;override&nbsp;the&nbsp;default.<br>
+&nbsp;<br>
+Fields&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;specify&nbsp;which&nbsp;fields&nbsp;to&nbsp;reload.&nbsp;The&nbsp;fields<br>
+should&nbsp;be&nbsp;an&nbsp;iterable&nbsp;of&nbsp;field&nbsp;attnames.&nbsp;If&nbsp;fields&nbsp;is&nbsp;None,&nbsp;then<br>
+all&nbsp;non-deferred&nbsp;fields&nbsp;are&nbsp;reloaded.<br>
+&nbsp;<br>
+When&nbsp;accessing&nbsp;deferred&nbsp;fields&nbsp;of&nbsp;an&nbsp;instance,&nbsp;the&nbsp;deferred&nbsp;loading<br>
+of&nbsp;the&nbsp;field&nbsp;will&nbsp;call&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="Profile-save"><strong>save</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Save&nbsp;the&nbsp;current&nbsp;instance.&nbsp;Override&nbsp;this&nbsp;in&nbsp;a&nbsp;subclass&nbsp;if&nbsp;you&nbsp;want&nbsp;to<br>
+control&nbsp;the&nbsp;saving&nbsp;process.<br>
+&nbsp;<br>
+The&nbsp;'force_insert'&nbsp;and&nbsp;'force_update'&nbsp;parameters&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;insist<br>
+that&nbsp;the&nbsp;"save"&nbsp;must&nbsp;be&nbsp;an&nbsp;SQL&nbsp;insert&nbsp;or&nbsp;update&nbsp;(or&nbsp;equivalent&nbsp;for<br>
+non-SQL&nbsp;backends),&nbsp;respectively.&nbsp;Normally,&nbsp;they&nbsp;should&nbsp;not&nbsp;be&nbsp;set.</span></dd></dl>
+
+<dl><dt><a name="Profile-save_base"><strong>save_base</strong></a>(self, raw=False, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Handle&nbsp;the&nbsp;parts&nbsp;of&nbsp;saving&nbsp;which&nbsp;should&nbsp;be&nbsp;done&nbsp;only&nbsp;once&nbsp;per&nbsp;save,<br>
+yet&nbsp;need&nbsp;to&nbsp;be&nbsp;done&nbsp;in&nbsp;raw&nbsp;saves,&nbsp;too.&nbsp;This&nbsp;includes&nbsp;some&nbsp;sanity<br>
+checks&nbsp;and&nbsp;signal&nbsp;sending.<br>
+&nbsp;<br>
+The&nbsp;'raw'&nbsp;argument&nbsp;is&nbsp;telling&nbsp;save_base&nbsp;not&nbsp;to&nbsp;save&nbsp;any&nbsp;parent<br>
+models&nbsp;and&nbsp;not&nbsp;to&nbsp;do&nbsp;any&nbsp;changes&nbsp;to&nbsp;the&nbsp;values&nbsp;before&nbsp;save.&nbsp;This<br>
+is&nbsp;used&nbsp;by&nbsp;fixture&nbsp;loading.</span></dd></dl>
+
+<dl><dt><a name="Profile-serializable_value"><strong>serializable_value</strong></a>(self, field_name)</dt><dd><span class="code">Return&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;field&nbsp;name&nbsp;for&nbsp;this&nbsp;instance.&nbsp;If&nbsp;the&nbsp;field&nbsp;is<br>
+a&nbsp;foreign&nbsp;key,&nbsp;return&nbsp;the&nbsp;id&nbsp;value&nbsp;instead&nbsp;of&nbsp;the&nbsp;object.&nbsp;If&nbsp;there's<br>
+no&nbsp;Field&nbsp;object&nbsp;with&nbsp;this&nbsp;name&nbsp;on&nbsp;the&nbsp;model,&nbsp;return&nbsp;the&nbsp;model<br>
+attribute's&nbsp;value.<br>
+&nbsp;<br>
+Used&nbsp;to&nbsp;serialize&nbsp;a&nbsp;field's&nbsp;value&nbsp;(in&nbsp;the&nbsp;serializer,&nbsp;or&nbsp;form&nbsp;output,<br>
+for&nbsp;example).&nbsp;Normally,&nbsp;you&nbsp;would&nbsp;just&nbsp;access&nbsp;the&nbsp;attribute&nbsp;directly<br>
+and&nbsp;not&nbsp;use&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="Profile-unique_error_message"><strong>unique_error_message</strong></a>(self, model_class, unique_check)</dt></dl>
+
+<dl><dt><a name="Profile-validate_constraints"><strong>validate_constraints</strong></a>(self, exclude=None)</dt></dl>
+
+<dl><dt><a name="Profile-validate_unique"><strong>validate_unique</strong></a>(self, exclude=None)</dt><dd><span class="code">Check&nbsp;unique&nbsp;constraints&nbsp;on&nbsp;the&nbsp;model&nbsp;and&nbsp;raise&nbsp;ValidationError&nbsp;if&nbsp;any<br>
+failed.</span></dd></dl>
+
+<hr>
+Class methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="Profile-check"><strong>check</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<dl><dt><a name="Profile-from_db"><strong>from_db</strong></a>(db, field_names, values)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><strong>pk</strong></dt>
+</dl>
+<hr>
+Class methods inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><a name="Profile-__init_subclass__"><strong>__init_subclass__</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt><dd><span class="code">This&nbsp;method&nbsp;is&nbsp;called&nbsp;when&nbsp;a&nbsp;class&nbsp;is&nbsp;subclassed.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;implementation&nbsp;does&nbsp;nothing.&nbsp;It&nbsp;may&nbsp;be<br>
+overridden&nbsp;to&nbsp;extend&nbsp;subclasses.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="TargetCalories">class <strong>TargetCalories</strong></a>(<a href="django.db.models.base.html#Model">django.db.models.base.Model</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#TargetCalories">TargetCalories</a>(*args,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Class&nbsp;Name:&nbsp;<a href="#TargetCalories">TargetCalories</a><br>
+Programmer:&nbsp;Jared&nbsp;Jasso<br>
+&nbsp;<br>
+It&nbsp;has&nbsp;a&nbsp;one-to-one&nbsp;relationship&nbsp;with&nbsp;the&nbsp;<a href="#Profile">Profile</a>&nbsp;model,&nbsp;meaning&nbsp;each&nbsp;profile&nbsp;can&nbsp;<br>
+have&nbsp;only&nbsp;have&nbsp;one&nbsp;target&nbsp;calories&nbsp;at&nbsp;a&nbsp;time.&nbsp;<br>
+&nbsp;<br>
+Stores&nbsp;the&nbsp;target&nbsp;calories&nbsp;for&nbsp;a&nbsp;user&nbsp;based&nbsp;on&nbsp;their&nbsp;profile&nbsp;information.&nbsp;It&nbsp;also&nbsp;<br>
+records&nbsp;the&nbsp;date&nbsp;and&nbsp;time&nbsp;when&nbsp;the&nbsp;target&nbsp;calories&nbsp;were&nbsp;created&nbsp;and&nbsp;last&nbsp;updated.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="app.models.html#TargetCalories">TargetCalories</a></dd>
+<dd><a href="django.db.models.base.html#Model">django.db.models.base.Model</a></dd>
+<dd><a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<strong>created_at</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<dl><dt><a name="TargetCalories-get_next_by_created_at"><strong>get_next_by_created_at</strong></a> = _method(self, *, field=&lt;django.db.models.fields.DateTimeField: created_at&gt;, is_next=True, **kwargs)</dt></dl>
+
+<dl><dt><a name="TargetCalories-get_next_by_updated_at"><strong>get_next_by_updated_at</strong></a> = _method(self, *, field=&lt;django.db.models.fields.DateTimeField: updated_at&gt;, is_next=True, **kwargs)</dt></dl>
+
+<dl><dt><a name="TargetCalories-get_previous_by_created_at"><strong>get_previous_by_created_at</strong></a> = _method(self, *, field=&lt;django.db.models.fields.DateTimeField: created_at&gt;, is_next=False, **kwargs)</dt></dl>
+
+<dl><dt><a name="TargetCalories-get_previous_by_updated_at"><strong>get_previous_by_updated_at</strong></a> = _method(self, *, field=&lt;django.db.models.fields.DateTimeField: updated_at&gt;, is_next=False, **kwargs)</dt></dl>
+
+<strong>id</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>target_calories</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>updated_at</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>profile</strong></dt>
+</dl>
+<dl><dt><strong>profile_id</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>DoesNotExist</strong> = &lt;class 'app.models.TargetCalories.DoesNotExist'&gt;</dl>
+
+<dl><dt><strong>MultipleObjectsReturned</strong> = &lt;class 'app.models.TargetCalories.MultipleObjectsReturned'&gt;</dl>
+
+<dl><dt><strong>objects</strong> = &lt;django.db.models.manager.Manager object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="TargetCalories-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><span class="code">Return&nbsp;self==value.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-__getstate__"><strong>__getstate__</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;to&nbsp;allow&nbsp;choosing&nbsp;the&nbsp;attributes&nbsp;to&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-__init__"><strong>__init__</strong></a>(self, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-__reduce__"><strong>__reduce__</strong></a>(self)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-__setstate__"><strong>__setstate__</strong></a>(self, state)</dt></dl>
+
+<dl><dt><a name="TargetCalories-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<dl><dt>async <a name="TargetCalories-adelete"><strong>adelete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt>async <a name="TargetCalories-arefresh_from_db"><strong>arefresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt></dl>
+
+<dl><dt>async <a name="TargetCalories-asave"><strong>asave</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">#&nbsp;RemovedInDjango60Warning:&nbsp;When&nbsp;the&nbsp;deprecation&nbsp;ends,&nbsp;replace&nbsp;with:<br>
+#&nbsp;async&nbsp;def&nbsp;<a href="#TargetCalories-asave">asave</a>(<br>
+#&nbsp;&nbsp;&nbsp;self,&nbsp;*,&nbsp;force_insert=False,&nbsp;force_update=False,&nbsp;using=None,&nbsp;update_fields=None,<br>
+#&nbsp;):</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-clean"><strong>clean</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;for&nbsp;doing&nbsp;any&nbsp;extra&nbsp;model-wide&nbsp;validation&nbsp;after&nbsp;<a href="#TargetCalories-clean">clean</a>()&nbsp;has&nbsp;been<br>
+called&nbsp;on&nbsp;every&nbsp;field&nbsp;by&nbsp;self.<strong>clean_fields</strong>.&nbsp;Any&nbsp;ValidationError&nbsp;raised<br>
+by&nbsp;this&nbsp;method&nbsp;will&nbsp;not&nbsp;be&nbsp;associated&nbsp;with&nbsp;a&nbsp;particular&nbsp;field;&nbsp;it&nbsp;will<br>
+have&nbsp;a&nbsp;special-case&nbsp;association&nbsp;with&nbsp;the&nbsp;field&nbsp;defined&nbsp;by&nbsp;NON_FIELD_ERRORS.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-clean_fields"><strong>clean_fields</strong></a>(self, exclude=None)</dt><dd><span class="code">Clean&nbsp;all&nbsp;fields&nbsp;and&nbsp;raise&nbsp;a&nbsp;ValidationError&nbsp;containing&nbsp;a&nbsp;dict<br>
+of&nbsp;all&nbsp;validation&nbsp;errors&nbsp;if&nbsp;any&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-date_error_message"><strong>date_error_message</strong></a>(self, lookup_type, field_name, unique_for)</dt></dl>
+
+<dl><dt><a name="TargetCalories-delete"><strong>delete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt><a name="TargetCalories-full_clean"><strong>full_clean</strong></a>(self, exclude=None, validate_unique=True, validate_constraints=True)</dt><dd><span class="code">Call&nbsp;<a href="#TargetCalories-clean_fields">clean_fields</a>(),&nbsp;<a href="#TargetCalories-clean">clean</a>(),&nbsp;<a href="#TargetCalories-validate_unique">validate_unique</a>(),&nbsp;and<br>
+<a href="#TargetCalories-validate_constraints">validate_constraints</a>()&nbsp;on&nbsp;the&nbsp;model.&nbsp;Raise&nbsp;a&nbsp;ValidationError&nbsp;for&nbsp;any<br>
+errors&nbsp;that&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-get_constraints"><strong>get_constraints</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TargetCalories-get_deferred_fields"><strong>get_deferred_fields</strong></a>(self)</dt><dd><span class="code">Return&nbsp;a&nbsp;set&nbsp;containing&nbsp;names&nbsp;of&nbsp;deferred&nbsp;fields&nbsp;for&nbsp;this&nbsp;instance.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-prepare_database_save"><strong>prepare_database_save</strong></a>(self, field)</dt></dl>
+
+<dl><dt><a name="TargetCalories-refresh_from_db"><strong>refresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt><dd><span class="code">Reload&nbsp;field&nbsp;values&nbsp;from&nbsp;the&nbsp;database.<br>
+&nbsp;<br>
+By&nbsp;default,&nbsp;the&nbsp;reloading&nbsp;happens&nbsp;from&nbsp;the&nbsp;database&nbsp;this&nbsp;instance&nbsp;was<br>
+loaded&nbsp;from,&nbsp;or&nbsp;by&nbsp;the&nbsp;read&nbsp;router&nbsp;if&nbsp;this&nbsp;instance&nbsp;wasn't&nbsp;loaded&nbsp;from<br>
+any&nbsp;database.&nbsp;The&nbsp;using&nbsp;parameter&nbsp;will&nbsp;override&nbsp;the&nbsp;default.<br>
+&nbsp;<br>
+Fields&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;specify&nbsp;which&nbsp;fields&nbsp;to&nbsp;reload.&nbsp;The&nbsp;fields<br>
+should&nbsp;be&nbsp;an&nbsp;iterable&nbsp;of&nbsp;field&nbsp;attnames.&nbsp;If&nbsp;fields&nbsp;is&nbsp;None,&nbsp;then<br>
+all&nbsp;non-deferred&nbsp;fields&nbsp;are&nbsp;reloaded.<br>
+&nbsp;<br>
+When&nbsp;accessing&nbsp;deferred&nbsp;fields&nbsp;of&nbsp;an&nbsp;instance,&nbsp;the&nbsp;deferred&nbsp;loading<br>
+of&nbsp;the&nbsp;field&nbsp;will&nbsp;call&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-save"><strong>save</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Save&nbsp;the&nbsp;current&nbsp;instance.&nbsp;Override&nbsp;this&nbsp;in&nbsp;a&nbsp;subclass&nbsp;if&nbsp;you&nbsp;want&nbsp;to<br>
+control&nbsp;the&nbsp;saving&nbsp;process.<br>
+&nbsp;<br>
+The&nbsp;'force_insert'&nbsp;and&nbsp;'force_update'&nbsp;parameters&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;insist<br>
+that&nbsp;the&nbsp;"save"&nbsp;must&nbsp;be&nbsp;an&nbsp;SQL&nbsp;insert&nbsp;or&nbsp;update&nbsp;(or&nbsp;equivalent&nbsp;for<br>
+non-SQL&nbsp;backends),&nbsp;respectively.&nbsp;Normally,&nbsp;they&nbsp;should&nbsp;not&nbsp;be&nbsp;set.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-save_base"><strong>save_base</strong></a>(self, raw=False, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Handle&nbsp;the&nbsp;parts&nbsp;of&nbsp;saving&nbsp;which&nbsp;should&nbsp;be&nbsp;done&nbsp;only&nbsp;once&nbsp;per&nbsp;save,<br>
+yet&nbsp;need&nbsp;to&nbsp;be&nbsp;done&nbsp;in&nbsp;raw&nbsp;saves,&nbsp;too.&nbsp;This&nbsp;includes&nbsp;some&nbsp;sanity<br>
+checks&nbsp;and&nbsp;signal&nbsp;sending.<br>
+&nbsp;<br>
+The&nbsp;'raw'&nbsp;argument&nbsp;is&nbsp;telling&nbsp;save_base&nbsp;not&nbsp;to&nbsp;save&nbsp;any&nbsp;parent<br>
+models&nbsp;and&nbsp;not&nbsp;to&nbsp;do&nbsp;any&nbsp;changes&nbsp;to&nbsp;the&nbsp;values&nbsp;before&nbsp;save.&nbsp;This<br>
+is&nbsp;used&nbsp;by&nbsp;fixture&nbsp;loading.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-serializable_value"><strong>serializable_value</strong></a>(self, field_name)</dt><dd><span class="code">Return&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;field&nbsp;name&nbsp;for&nbsp;this&nbsp;instance.&nbsp;If&nbsp;the&nbsp;field&nbsp;is<br>
+a&nbsp;foreign&nbsp;key,&nbsp;return&nbsp;the&nbsp;id&nbsp;value&nbsp;instead&nbsp;of&nbsp;the&nbsp;object.&nbsp;If&nbsp;there's<br>
+no&nbsp;Field&nbsp;object&nbsp;with&nbsp;this&nbsp;name&nbsp;on&nbsp;the&nbsp;model,&nbsp;return&nbsp;the&nbsp;model<br>
+attribute's&nbsp;value.<br>
+&nbsp;<br>
+Used&nbsp;to&nbsp;serialize&nbsp;a&nbsp;field's&nbsp;value&nbsp;(in&nbsp;the&nbsp;serializer,&nbsp;or&nbsp;form&nbsp;output,<br>
+for&nbsp;example).&nbsp;Normally,&nbsp;you&nbsp;would&nbsp;just&nbsp;access&nbsp;the&nbsp;attribute&nbsp;directly<br>
+and&nbsp;not&nbsp;use&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="TargetCalories-unique_error_message"><strong>unique_error_message</strong></a>(self, model_class, unique_check)</dt></dl>
+
+<dl><dt><a name="TargetCalories-validate_constraints"><strong>validate_constraints</strong></a>(self, exclude=None)</dt></dl>
+
+<dl><dt><a name="TargetCalories-validate_unique"><strong>validate_unique</strong></a>(self, exclude=None)</dt><dd><span class="code">Check&nbsp;unique&nbsp;constraints&nbsp;on&nbsp;the&nbsp;model&nbsp;and&nbsp;raise&nbsp;ValidationError&nbsp;if&nbsp;any<br>
+failed.</span></dd></dl>
+
+<hr>
+Class methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="TargetCalories-check"><strong>check</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<dl><dt><a name="TargetCalories-from_db"><strong>from_db</strong></a>(db, field_names, values)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><strong>pk</strong></dt>
+</dl>
+<hr>
+Class methods inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><a name="TargetCalories-__init_subclass__"><strong>__init_subclass__</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt><dd><span class="code">This&nbsp;method&nbsp;is&nbsp;called&nbsp;when&nbsp;a&nbsp;class&nbsp;is&nbsp;subclassed.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;implementation&nbsp;does&nbsp;nothing.&nbsp;It&nbsp;may&nbsp;be<br>
+overridden&nbsp;to&nbsp;extend&nbsp;subclasses.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="User">class <strong>User</strong></a>(<a href="django.db.models.base.html#Model">django.db.models.base.Model</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#User">User</a>(*args,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Class&nbsp;Name:&nbsp;<a href="#User">User</a><br>
+Programmer:&nbsp;Jerry&nbsp;Ochoa<br>
+&nbsp;<br>
+Stores&nbsp;the&nbsp;users&nbsp;information&nbsp;such&nbsp;as&nbsp;first&nbsp;name,&nbsp;last&nbsp;name,&nbsp;email,&nbsp;and&nbsp;password.&nbsp;It&nbsp;also&nbsp;records&nbsp;the&nbsp;date&nbsp;and&nbsp;<br>
+time&nbsp;when&nbsp;the&nbsp;user&nbsp;was&nbsp;created&nbsp;and&nbsp;last&nbsp;updated.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="app.models.html#User">User</a></dd>
+<dd><a href="django.db.models.base.html#Model">django.db.models.base.Model</a></dd>
+<dd><a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<strong>created_at</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>email</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>first_name</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<dl><dt><a name="User-get_next_by_created_at"><strong>get_next_by_created_at</strong></a> = _method(self, *, field=&lt;django.db.models.fields.DateTimeField: created_at&gt;, is_next=True, **kwargs)</dt></dl>
+
+<dl><dt><a name="User-get_next_by_updated_at"><strong>get_next_by_updated_at</strong></a> = _method(self, *, field=&lt;django.db.models.fields.DateTimeField: updated_at&gt;, is_next=True, **kwargs)</dt></dl>
+
+<dl><dt><a name="User-get_previous_by_created_at"><strong>get_previous_by_created_at</strong></a> = _method(self, *, field=&lt;django.db.models.fields.DateTimeField: created_at&gt;, is_next=False, **kwargs)</dt></dl>
+
+<dl><dt><a name="User-get_previous_by_updated_at"><strong>get_previous_by_updated_at</strong></a> = _method(self, *, field=&lt;django.db.models.fields.DateTimeField: updated_at&gt;, is_next=False, **kwargs)</dt></dl>
+
+<strong>id</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>last_name</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>password</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<strong>updated_at</strong> = &lt;django.db.models.query_utils.DeferredAttribute object&gt;
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>profile</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>DoesNotExist</strong> = &lt;class 'app.models.User.DoesNotExist'&gt;</dl>
+
+<dl><dt><strong>MultipleObjectsReturned</strong> = &lt;class 'app.models.User.MultipleObjectsReturned'&gt;</dl>
+
+<dl><dt><strong>objects</strong> = &lt;django.db.models.manager.Manager object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="User-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><span class="code">Return&nbsp;self==value.</span></dd></dl>
+
+<dl><dt><a name="User-__getstate__"><strong>__getstate__</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;to&nbsp;allow&nbsp;choosing&nbsp;the&nbsp;attributes&nbsp;to&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="User-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;hash(self).</span></dd></dl>
+
+<dl><dt><a name="User-__init__"><strong>__init__</strong></a>(self, *args, **kwargs)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="User-__reduce__"><strong>__reduce__</strong></a>(self)</dt><dd><span class="code">Helper&nbsp;for&nbsp;pickle.</span></dd></dl>
+
+<dl><dt><a name="User-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<dl><dt><a name="User-__setstate__"><strong>__setstate__</strong></a>(self, state)</dt></dl>
+
+<dl><dt><a name="User-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<dl><dt>async <a name="User-adelete"><strong>adelete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt>async <a name="User-arefresh_from_db"><strong>arefresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt></dl>
+
+<dl><dt>async <a name="User-asave"><strong>asave</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">#&nbsp;RemovedInDjango60Warning:&nbsp;When&nbsp;the&nbsp;deprecation&nbsp;ends,&nbsp;replace&nbsp;with:<br>
+#&nbsp;async&nbsp;def&nbsp;<a href="#User-asave">asave</a>(<br>
+#&nbsp;&nbsp;&nbsp;self,&nbsp;*,&nbsp;force_insert=False,&nbsp;force_update=False,&nbsp;using=None,&nbsp;update_fields=None,<br>
+#&nbsp;):</span></dd></dl>
+
+<dl><dt><a name="User-clean"><strong>clean</strong></a>(self)</dt><dd><span class="code">Hook&nbsp;for&nbsp;doing&nbsp;any&nbsp;extra&nbsp;model-wide&nbsp;validation&nbsp;after&nbsp;<a href="#User-clean">clean</a>()&nbsp;has&nbsp;been<br>
+called&nbsp;on&nbsp;every&nbsp;field&nbsp;by&nbsp;self.<strong>clean_fields</strong>.&nbsp;Any&nbsp;ValidationError&nbsp;raised<br>
+by&nbsp;this&nbsp;method&nbsp;will&nbsp;not&nbsp;be&nbsp;associated&nbsp;with&nbsp;a&nbsp;particular&nbsp;field;&nbsp;it&nbsp;will<br>
+have&nbsp;a&nbsp;special-case&nbsp;association&nbsp;with&nbsp;the&nbsp;field&nbsp;defined&nbsp;by&nbsp;NON_FIELD_ERRORS.</span></dd></dl>
+
+<dl><dt><a name="User-clean_fields"><strong>clean_fields</strong></a>(self, exclude=None)</dt><dd><span class="code">Clean&nbsp;all&nbsp;fields&nbsp;and&nbsp;raise&nbsp;a&nbsp;ValidationError&nbsp;containing&nbsp;a&nbsp;dict<br>
+of&nbsp;all&nbsp;validation&nbsp;errors&nbsp;if&nbsp;any&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="User-date_error_message"><strong>date_error_message</strong></a>(self, lookup_type, field_name, unique_for)</dt></dl>
+
+<dl><dt><a name="User-delete"><strong>delete</strong></a>(self, using=None, keep_parents=False)</dt></dl>
+
+<dl><dt><a name="User-full_clean"><strong>full_clean</strong></a>(self, exclude=None, validate_unique=True, validate_constraints=True)</dt><dd><span class="code">Call&nbsp;<a href="#User-clean_fields">clean_fields</a>(),&nbsp;<a href="#User-clean">clean</a>(),&nbsp;<a href="#User-validate_unique">validate_unique</a>(),&nbsp;and<br>
+<a href="#User-validate_constraints">validate_constraints</a>()&nbsp;on&nbsp;the&nbsp;model.&nbsp;Raise&nbsp;a&nbsp;ValidationError&nbsp;for&nbsp;any<br>
+errors&nbsp;that&nbsp;occur.</span></dd></dl>
+
+<dl><dt><a name="User-get_constraints"><strong>get_constraints</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="User-get_deferred_fields"><strong>get_deferred_fields</strong></a>(self)</dt><dd><span class="code">Return&nbsp;a&nbsp;set&nbsp;containing&nbsp;names&nbsp;of&nbsp;deferred&nbsp;fields&nbsp;for&nbsp;this&nbsp;instance.</span></dd></dl>
+
+<dl><dt><a name="User-prepare_database_save"><strong>prepare_database_save</strong></a>(self, field)</dt></dl>
+
+<dl><dt><a name="User-refresh_from_db"><strong>refresh_from_db</strong></a>(self, using=None, fields=None, from_queryset=None)</dt><dd><span class="code">Reload&nbsp;field&nbsp;values&nbsp;from&nbsp;the&nbsp;database.<br>
+&nbsp;<br>
+By&nbsp;default,&nbsp;the&nbsp;reloading&nbsp;happens&nbsp;from&nbsp;the&nbsp;database&nbsp;this&nbsp;instance&nbsp;was<br>
+loaded&nbsp;from,&nbsp;or&nbsp;by&nbsp;the&nbsp;read&nbsp;router&nbsp;if&nbsp;this&nbsp;instance&nbsp;wasn't&nbsp;loaded&nbsp;from<br>
+any&nbsp;database.&nbsp;The&nbsp;using&nbsp;parameter&nbsp;will&nbsp;override&nbsp;the&nbsp;default.<br>
+&nbsp;<br>
+Fields&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;specify&nbsp;which&nbsp;fields&nbsp;to&nbsp;reload.&nbsp;The&nbsp;fields<br>
+should&nbsp;be&nbsp;an&nbsp;iterable&nbsp;of&nbsp;field&nbsp;attnames.&nbsp;If&nbsp;fields&nbsp;is&nbsp;None,&nbsp;then<br>
+all&nbsp;non-deferred&nbsp;fields&nbsp;are&nbsp;reloaded.<br>
+&nbsp;<br>
+When&nbsp;accessing&nbsp;deferred&nbsp;fields&nbsp;of&nbsp;an&nbsp;instance,&nbsp;the&nbsp;deferred&nbsp;loading<br>
+of&nbsp;the&nbsp;field&nbsp;will&nbsp;call&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="User-save"><strong>save</strong></a>(self, *args, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Save&nbsp;the&nbsp;current&nbsp;instance.&nbsp;Override&nbsp;this&nbsp;in&nbsp;a&nbsp;subclass&nbsp;if&nbsp;you&nbsp;want&nbsp;to<br>
+control&nbsp;the&nbsp;saving&nbsp;process.<br>
+&nbsp;<br>
+The&nbsp;'force_insert'&nbsp;and&nbsp;'force_update'&nbsp;parameters&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;insist<br>
+that&nbsp;the&nbsp;"save"&nbsp;must&nbsp;be&nbsp;an&nbsp;SQL&nbsp;insert&nbsp;or&nbsp;update&nbsp;(or&nbsp;equivalent&nbsp;for<br>
+non-SQL&nbsp;backends),&nbsp;respectively.&nbsp;Normally,&nbsp;they&nbsp;should&nbsp;not&nbsp;be&nbsp;set.</span></dd></dl>
+
+<dl><dt><a name="User-save_base"><strong>save_base</strong></a>(self, raw=False, force_insert=False, force_update=False, using=None, update_fields=None)</dt><dd><span class="code">Handle&nbsp;the&nbsp;parts&nbsp;of&nbsp;saving&nbsp;which&nbsp;should&nbsp;be&nbsp;done&nbsp;only&nbsp;once&nbsp;per&nbsp;save,<br>
+yet&nbsp;need&nbsp;to&nbsp;be&nbsp;done&nbsp;in&nbsp;raw&nbsp;saves,&nbsp;too.&nbsp;This&nbsp;includes&nbsp;some&nbsp;sanity<br>
+checks&nbsp;and&nbsp;signal&nbsp;sending.<br>
+&nbsp;<br>
+The&nbsp;'raw'&nbsp;argument&nbsp;is&nbsp;telling&nbsp;save_base&nbsp;not&nbsp;to&nbsp;save&nbsp;any&nbsp;parent<br>
+models&nbsp;and&nbsp;not&nbsp;to&nbsp;do&nbsp;any&nbsp;changes&nbsp;to&nbsp;the&nbsp;values&nbsp;before&nbsp;save.&nbsp;This<br>
+is&nbsp;used&nbsp;by&nbsp;fixture&nbsp;loading.</span></dd></dl>
+
+<dl><dt><a name="User-serializable_value"><strong>serializable_value</strong></a>(self, field_name)</dt><dd><span class="code">Return&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;field&nbsp;name&nbsp;for&nbsp;this&nbsp;instance.&nbsp;If&nbsp;the&nbsp;field&nbsp;is<br>
+a&nbsp;foreign&nbsp;key,&nbsp;return&nbsp;the&nbsp;id&nbsp;value&nbsp;instead&nbsp;of&nbsp;the&nbsp;object.&nbsp;If&nbsp;there's<br>
+no&nbsp;Field&nbsp;object&nbsp;with&nbsp;this&nbsp;name&nbsp;on&nbsp;the&nbsp;model,&nbsp;return&nbsp;the&nbsp;model<br>
+attribute's&nbsp;value.<br>
+&nbsp;<br>
+Used&nbsp;to&nbsp;serialize&nbsp;a&nbsp;field's&nbsp;value&nbsp;(in&nbsp;the&nbsp;serializer,&nbsp;or&nbsp;form&nbsp;output,<br>
+for&nbsp;example).&nbsp;Normally,&nbsp;you&nbsp;would&nbsp;just&nbsp;access&nbsp;the&nbsp;attribute&nbsp;directly<br>
+and&nbsp;not&nbsp;use&nbsp;this&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="User-unique_error_message"><strong>unique_error_message</strong></a>(self, model_class, unique_check)</dt></dl>
+
+<dl><dt><a name="User-validate_constraints"><strong>validate_constraints</strong></a>(self, exclude=None)</dt></dl>
+
+<dl><dt><a name="User-validate_unique"><strong>validate_unique</strong></a>(self, exclude=None)</dt><dd><span class="code">Check&nbsp;unique&nbsp;constraints&nbsp;on&nbsp;the&nbsp;model&nbsp;and&nbsp;raise&nbsp;ValidationError&nbsp;if&nbsp;any<br>
+failed.</span></dd></dl>
+
+<hr>
+Class methods inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><a name="User-check"><strong>check</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<dl><dt><a name="User-from_db"><strong>from_db</strong></a>(db, field_names, values)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.base.html#Model">django.db.models.base.Model</a>:<br>
+<dl><dt><strong>pk</strong></dt>
+</dl>
+<hr>
+Class methods inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><a name="User-__init_subclass__"><strong>__init_subclass__</strong></a>(**kwargs)<span class="grey"><span class="heading-text"> from <a href="django.db.models.base.html#ModelBase">django.db.models.base.ModelBase</a></span></span></dt><dd><span class="code">This&nbsp;method&nbsp;is&nbsp;called&nbsp;when&nbsp;a&nbsp;class&nbsp;is&nbsp;subclassed.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;implementation&nbsp;does&nbsp;nothing.&nbsp;It&nbsp;may&nbsp;be<br>
+overridden&nbsp;to&nbsp;extend&nbsp;subclasses.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="django.db.models.utils.html#AltersData">django.db.models.utils.AltersData</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
