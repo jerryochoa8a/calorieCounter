@@ -139,7 +139,7 @@
     <h2>Search Food</h2>
     <p class="label">Example: amount = 2, food = eggs. Nutrition comes from CalorieNinjas.</p>
 
-    <form method="post" action="{% url 'food_search' %}">
+    <form method="post" action="searchFood">
         {% csrf_token %}
 
         <label for="amount">Amount / serving</label>
