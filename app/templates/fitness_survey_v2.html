@@ -1,0 +1,375 @@
+{% extends "base.html" %}
+
+{% block title %}Fitness Survey | My Workout Homie{% endblock %}
+
+{% block extra_css %}
+<style>
+    .survey-header {
+        text-align: center;
+        margin: 24px 0 20px;
+    }
+
+    .survey-icon {
+        width: 72px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 14px;
+        border-radius: 22px;
+        background: var(--card);
+        font-size: 34px;
+    }
+
+    .survey-header p,
+    .question-help {
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    .progress {
+        height: 7px;
+        background: var(--card-light);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 18px;
+    }
+
+    .progress-fill {
+        width: 100%;
+        height: 100%;
+        background: var(--blue);
+    }
+
+    .question-title {
+        margin-bottom: 6px;
+    }
+
+    .question-help {
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
+
+    .choice-grid {
+        display: grid;
+        gap: 10px;
+    }
+
+    .choice {
+        position: relative;
+    }
+
+    .choice input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .choice label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 68px;
+        margin: 0;
+        padding: 13px;
+        background: var(--card-light);
+        color: var(--text);
+        border: 2px solid transparent;
+        border-radius: 13px;
+        cursor: pointer;
+        transition: 0.15s ease;
+    }
+
+    .choice label:hover {
+        border-color: var(--border);
+    }
+
+    .choice input:checked + label {
+        border-color: var(--blue);
+        background: rgba(10, 132, 255, 0.12);
+    }
+
+    .choice-icon {
+        width: 42px;
+        height: 42px;
+        flex: 0 0 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: var(--card);
+        font-size: 22px;
+    }
+
+    .choice-title {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 3px;
+    }
+
+    .choice-description {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+    }
+
+    .measurement-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .result-card {
+        display: none;
+        border: 1px solid var(--blue);
+    }
+
+    .result-card.visible {
+        display: block;
+    }
+
+    .result-type {
+        color: var(--blue);
+        font-size: 28px;
+        font-weight: 800;
+        text-transform: capitalize;
+        margin: 5px 0 8px;
+    }
+
+    .privacy-note {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.45;
+        text-align: center;
+        margin-top: 14px;
+    }
+
+    @media (max-width: 420px) {
+        .measurement-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="survey-header">
+    <div class="survey-icon">🎯</div>
+    <h1>Build your plan</h1>
+    <p>Tell us what you want to accomplish so we can recommend whether you should cut, bulk, or maintain.</p>
+</div>
+
+<div class="progress" aria-label="Survey progress">
+    <div class="progress-fill"></div>
+</div>
+
+<form method="post" action="{% url 'fitness_survey' %}" id="fitness-survey">
+    {% csrf_token %}
+
+    <section class="card">
+        <h2 class="question-title">What is your main fitness goal?</h2>
+        <p class="question-help">Choose the option that best matches what you want right now.</p>
+
+        <div class="choice-grid">
+            <div class="choice">
+                <input type="radio" id="goal-fat-loss" name="fitness_goal" value="cut" required>
+                <label for="goal-fat-loss">
+                    <span class="choice-icon">🔥</span>
+                    <span>
+                        <span class="choice-title">Lose body fat</span>
+                        <span class="choice-description">Reduce weight while keeping as much muscle as possible.</span>
+                    </span>
+                </label>
+            </div>
+
+            <div class="choice">
+                <input type="radio" id="goal-muscle" name="fitness_goal" value="bulk" required>
+                <label for="goal-muscle">
+                    <span class="choice-icon">💪</span>
+                    <span>
+                        <span class="choice-title">Build muscle and strength</span>
+                        <span class="choice-description">Gain weight gradually while focusing on muscle growth.</span>
+                    </span>
+                </label>
+            </div>
+
+            <div class="choice">
+                <input type="radio" id="goal-maintain" name="fitness_goal" value="maintain" required>
+                <label for="goal-maintain">
+                    <span class="choice-icon">⚖️</span>
+                    <span>
+                        <span class="choice-title">Maintain my current weight</span>
+                        <span class="choice-description">Improve fitness and habits without intentionally changing weight.</span>
+                    </span>
+                </label>
+            </div>
+
+            <div class="choice">
+                <input type="radio" id="goal-recomp" name="fitness_goal" value="recomp" required>
+                <label for="goal-recomp">
+                    <span class="choice-icon">🔄</span>
+                    <span>
+                        <span class="choice-title">Lose fat and gain muscle</span>
+                        <span class="choice-description">Focus on body recomposition with a balanced approach.</span>
+                    </span>
+                </label>
+            </div>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2 class="question-title">Tell us about yourself</h2>
+        <p class="question-help">These details help personalize your recommendation.</p>
+
+        <div class="measurement-grid">
+            <div>
+                <label for="current-weight">Current weight (lbs)</label>
+                <input
+                    type="number"
+                    id="current-weight"
+                    name="current_weight"
+                    min="50"
+                    max="700"
+                    step="0.1"
+                    placeholder="Example: 175"
+                    required
+                >
+            </div>
+
+            <div>
+                <label for="target-weight">Target weight (lbs)</label>
+                <input
+                    type="number"
+                    id="target-weight"
+                    name="target_weight"
+                    min="50"
+                    max="700"
+                    step="0.1"
+                    placeholder="Example: 165"
+                    required
+                >
+            </div>
+
+            <div>
+                <label for="height">Height (inches)</label>
+                <input
+                    type="number"
+                    id="height"
+                    name="height"
+                    min="36"
+                    max="96"
+                    step="1"
+                    placeholder="Example: 70"
+                    required
+                >
+            </div>
+
+            <div>
+                <label for="sex">Sex</label>
+                <select id="sex" name="sex" required>
+                    <option value="">Select sex</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2 class="question-title">How active are you?</h2>
+        <p class="question-help">Choose the option that best describes a normal week.</p>
+
+        <select name="activity_level" id="activity-level" required>
+            <option value="">Select an activity level</option>
+            <option value="sedentary">Mostly inactive</option>
+            <option value="light">Light activity, 1–2 workouts per week</option>
+            <option value="moderate">Moderate activity, 3–4 workouts per week</option>
+            <option value="active">Very active, 5–6 workouts per week</option>
+            <option value="very_active">Extremely active or physical job</option>
+        </select>
+    </section>
+
+    <section class="card result-card" id="recommendation-card" aria-live="polite">
+        <div class="label">Recommended direction</div>
+        <div class="result-type" id="recommendation-type"></div>
+        <p id="recommendation-text"></p>
+    </section>
+
+    <input type="hidden" name="recommended_plan" id="recommended-plan">
+
+    <button type="submit">Save My Fitness Plan</button>
+
+    <p class="privacy-note">
+        This recommendation is a general starting point and is not medical advice.
+    </p>
+</form>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const survey = document.getElementById("fitness-survey");
+    const goalInputs = document.querySelectorAll('input[name="fitness_goal"]');
+    const currentWeightInput = document.getElementById("current-weight");
+    const targetWeightInput = document.getElementById("target-weight");
+    const recommendationCard = document.getElementById("recommendation-card");
+    const recommendationType = document.getElementById("recommendation-type");
+    const recommendationText = document.getElementById("recommendation-text");
+    const recommendedPlan = document.getElementById("recommended-plan");
+
+    function getSelectedGoal() {
+        const selected = document.querySelector('input[name="fitness_goal"]:checked');
+        return selected ? selected.value : "";
+    }
+
+    function calculateRecommendation() {
+        const goal = getSelectedGoal();
+        const currentWeight = parseFloat(currentWeightInput.value);
+        const targetWeight = parseFloat(targetWeightInput.value);
+
+        if (!goal) {
+            recommendationCard.classList.remove("visible");
+            recommendedPlan.value = "";
+            return;
+        }
+
+        let plan = goal;
+        let explanation = "";
+
+        if (goal === "recomp") {
+            plan = "maintain";
+            explanation = "Start near maintenance calories while strength training and eating enough protein.";
+        } else if (goal === "cut") {
+            explanation = "Use a controlled calorie deficit to gradually reduce body weight and body fat.";
+        } else if (goal === "bulk") {
+            explanation = "Use a small calorie surplus to support muscle growth and strength gains.";
+        } else {
+            explanation = "Eat near maintenance calories while improving training, recovery, and consistency.";
+        }
+
+        if (!Number.isNaN(currentWeight) && !Number.isNaN(targetWeight)) {
+            if (targetWeight < currentWeight) {
+                plan = "cut";
+                explanation = "Your target weight is below your current weight, so a controlled cut is the best match.";
+            } else if (targetWeight > currentWeight) {
+                plan = "bulk";
+                explanation = "Your target weight is above your current weight, so a gradual bulk is the best match.";
+            } else {
+                plan = "maintain";
+                explanation = "Your target matches your current weight, so maintaining is the best match.";
+            }
+        }
+
+        recommendationType.textContent = plan;
+        recommendationText.textContent = explanation;
+        recommendedPlan.value = plan;
+        recommendationCard.classList.add("visible");
+    }
+
+    goalInputs.forEach(input => input.addEventListener("change", calculateRecommendation));
+    currentWeightInput.addEventListener("input", calculateRecommendation);
+    targetWeightInput.addEventListener("input", calculateRecommendation);
+
+    survey.addEventListener("submit", calculateRecommendation);
+</script>
+{% endblock %}
