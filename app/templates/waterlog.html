@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}Water | My Workout Homie{% endblock %}
+
+{% block extra_css %}
+<style>
+    .page-heading {
+        margin-bottom: 18px;
+    }
+
+    .page-heading p {
+        color: var(--muted);
+        line-height: 1.5;
+    }
+
+    .water-display {
+        text-align: center;
+    }
+
+    .water-icon {
+        font-size: 52px;
+        margin-bottom: 8px;
+    }
+
+    .water-total {
+        font-size: 38px;
+        font-weight: 800;
+        margin-bottom: 4px;
+    }
+
+    .cups {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin: 18px 0 4px;
+    }
+
+    .cup {
+        width: 34px;
+        height: 28px;
+        border: 2px solid var(--blue);
+        border-top-width: 4px;
+        border-radius: 4px 4px 9px 9px;
+        opacity: 0.35;
+    }
+
+    .cup-filled {
+        background: var(--blue);
+        opacity: 1;
+    }
+
+    .quick-buttons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin: 14px 0;
+    }
+
+    .quick-button {
+        background: var(--card-light);
+        border: 1px solid var(--border);
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-bottom: 14px;
+        color: var(--blue);
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    @media (max-width: 420px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<a class="back-link" href="{% url 'dashboard' %}">← Back to Dashboard</a>
+
+<header class="page-heading">
+    <h1>Water 💧</h1>
+    <p>Update today’s water intake and daily goal.</p>
+</header>
+
+<section class="card water-display">
+    <div class="water-icon">💧</div>
+    <div class="label">Water Today</div>
+    <div class="water-total">
+        {{ water_log.cups }} / {{ water_log.goal }}
+    </div>
+    <div class="label">cups</div>
+
+    <progress
+        class="stat-progress progress-water"
+        value="{{ water_log.cups }}"
+        max="{{ water_log.goal }}"
+    >
+        {{ water_log.cups }} of {{ water_log.goal }}
+    </progress>
+
+    <div class="cups" id="cup-preview">
+        {% with ""|center:water_log.goal as range %}
+            {% for _ in range %}
+                {% if forloop.counter <= water_log.cups %}
+                    <div class="cup cup-filled"></div>
+                {% else %}
+                    <div class="cup"></div>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+    </div>
+</section>
+
+<section class="card">
+    <h2>Update Water</h2>
+
+    <form method="post" action="{% url 'water' %}" id="water-form">
+        {% csrf_token %}
+
+        <div class="form-grid">
+            <div>
+                <label for="water-cups">Cups drank today</label>
+                <input
+                    type="number"
+                    id="water-cups"
+                    name="water_cups"
+                    min="0"
+                    max="50"
+                    step="1"
+                    value="{{ water_log.cups }}"
+                    required
+                >
+            </div>
+
+            <div>
+                <label for="water-goal">Daily goal</label>
+                <input
+                    type="number"
+                    id="water-goal"
+                    name="water_goal"
+                    min="1"
+                    max="50"
+                    step="1"
+                    value="{{ water_log.goal }}"
+                    required
+                >
+            </div>
+        </div>
+
+        <div class="quick-buttons">
+            <button type="button" class="quick-button" data-add="1">+1 Cup</button>
+            <button type="button" class="quick-button" data-add="2">+2 Cups</button>
+            <button type="button" class="quick-button" data-add="-1">−1 Cup</button>
+        </div>
+
+        <button type="submit">Save Water</button>
+    </form>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cupsInput = document.getElementById("water-cups");
+        const quickButtons = document.querySelectorAll("[data-add]");
+
+        quickButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const amount = parseInt(button.dataset.add, 10);
+                const current = parseInt(cupsInput.value || "0", 10);
+
+                cupsInput.value = Math.max(0, current + amount);
+            });
+        });
+    });
+</script>
+{% endblock %}

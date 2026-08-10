@@ -1,0 +1,646 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}Dashboard | My Workout Homie{% endblock %}
+{% block dashboard_active %}active{% endblock %}
+
+{% block extra_css %}
+<style>
+    .dashboard-heading {
+        margin-bottom: 18px;
+    }
+
+    .dashboard-heading p {
+        color: var(--muted);
+    }
+
+    .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .badge {
+        padding: 6px 12px;
+        background: var(--border);
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .ring-row {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .ring-legend {
+        flex: 1;
+    }
+
+    .ring-legend .row {
+        gap: 10px;
+        margin-bottom: 7px;
+        font-size: 13px;
+    }
+
+    .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin-right: 6px;
+        border-radius: 50%;
+    }
+
+    .dot-move {
+        background: var(--red);
+    }
+
+    .dot-exercise {
+        background: var(--green);
+    }
+
+    .dot-stand {
+        background: var(--blue);
+    }
+
+    .stat-progress {
+        width: 100%;
+        height: 7px;
+        margin-top: 9px;
+        overflow: hidden;
+        appearance: none;
+        border: none;
+        border-radius: 10px;
+        background: var(--border);
+    }
+
+    .stat-progress::-webkit-progress-bar {
+        background: var(--border);
+        border-radius: 10px;
+    }
+
+    .stat-progress::-webkit-progress-value {
+        border-radius: 10px;
+    }
+
+    .stat-progress::-moz-progress-bar {
+        border-radius: 10px;
+    }
+
+    .progress-calories::-webkit-progress-value {
+        background: var(--red);
+    }
+
+    .progress-calories::-moz-progress-bar {
+        background: var(--red);
+    }
+
+    .progress-weight::-webkit-progress-value {
+        background: var(--green);
+    }
+
+    .progress-weight::-moz-progress-bar {
+        background: var(--green);
+    }
+
+    .progress-water::-webkit-progress-value {
+        background: var(--blue);
+    }
+
+    .progress-water::-moz-progress-bar {
+        background: var(--blue);
+    }
+
+    .progress-steps::-webkit-progress-value {
+        background: var(--orange);
+    }
+
+    .progress-steps::-moz-progress-bar {
+        background: var(--orange);
+    }
+
+    .week-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+        text-align: center;
+    }
+
+    .day-letter {
+        color: var(--muted);
+        font-size: 11px;
+    }
+
+    .day-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        margin: 5px auto 0;
+        background: var(--card-light);
+        color: var(--muted);
+        border-radius: 50%;
+        font-size: 13px;
+    }
+
+    .day-has-log {
+        background: var(--green);
+        color: #000000;
+        font-weight: 700;
+    }
+
+    .day-today {
+        outline: 2px solid var(--blue);
+        outline-offset: 2px;
+    }
+
+    .cups {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .cup {
+        width: 32px;
+        height: 24px;
+        background: var(--card-light);
+        border-radius: 6px;
+    }
+
+    .cup-filled {
+        background: var(--blue);
+    }
+
+    .workout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 11px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .workout:last-child {
+        border-bottom: none;
+    }
+
+    .workout-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .workout-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        background: var(--card-light);
+        border-radius: 10px;
+    }
+
+    .weight-list {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .weight-entry {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+        background: var(--card-light);
+        border-radius: 10px;
+    }
+
+    .weight-entry-today {
+        border: 1px solid var(--blue);
+    }
+
+    .card-link {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .card-link .card {
+        transition: transform 0.15s ease, border-color 0.15s ease;
+        border: 1px solid transparent;
+    }
+
+    .card-link:hover .card {
+        transform: translateY(-2px);
+        border-color: var(--blue);
+    }
+
+    .dashboard-actions {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .dashboard-action {
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .dashboard-action-icon {
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .dashboard-action-title {
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+
+    .dashboard-action-text {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    @media (max-width: 390px) {
+        .dashboard-actions {
+            grid-template-columns: 1fr;
+        }
+
+        .grid2 {
+            grid-template-columns: 1fr;
+        }
+
+        .ring-row {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .ring-legend {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<header class="dashboard-heading">
+    <h2>Let's get it 💪</h2>
+    <p>Track your progress and stay consistent.</p>
+</header>
+
+<section class="dashboard-actions" aria-label="Update dashboard">
+    <a class="card-link" href="{% url 'food_log' %}">
+        <article class="card dashboard-action">
+            <div class="dashboard-action-icon">🍽️</div>
+            <div class="dashboard-action-title">Food Log</div>
+            <div class="dashboard-action-text">Add or update today's meals and calories.</div>
+        </article>
+    </a>
+
+    <a class="card-link" href="{% url 'fitness_survey' %}">
+        <article class="card dashboard-action">
+            <div class="dashboard-action-icon">🎯</div>
+            <div class="dashboard-action-title">Fitness Survey</div>
+            <div class="dashboard-action-text">Update your goal, weight, height, sex, and activity.</div>
+        </article>
+    </a>
+
+    <a class="card-link" href="{% url 'water' %}">
+        <article class="card dashboard-action">
+            <div class="dashboard-action-icon">💧</div>
+            <div class="dashboard-action-title">Water</div>
+            <div class="dashboard-action-text">Update today's water intake.</div>
+        </article>
+    </a>
+</section>
+
+{% if goal %}
+<section class="card">
+    <div class="label">Current Goal</div>
+
+    <div class="row">
+        <div>
+            <div class="big">{{ goal.name }}</div>
+            <div class="label">
+                {{ goal.weeks_in }} of {{ goal.weeks_total }} weeks in
+            </div>
+        </div>
+
+        <div class="badge">{{ goal.percent_complete }}% complete</div>
+    </div>
+</section>
+{% endif %}
+
+{% if log and rings %}
+<section class="card ring-row">
+    <svg
+        width="100"
+        height="100"
+        viewBox="0 0 100 100"
+        role="img"
+        aria-label="Daily activity progress rings"
+    >
+        <circle
+            cx="50"
+            cy="50"
+            r="{{ rings.0.radius }}"
+            stroke="#3a3a3c"
+            stroke-width="8"
+            fill="none"
+        ></circle>
+
+        <circle
+            cx="50"
+            cy="50"
+            r="{{ rings.0.radius }}"
+            stroke="{{ rings.0.color }}"
+            stroke-width="8"
+            fill="none"
+            stroke-dasharray="{{ rings.0.dash }} {{ rings.0.circ }}"
+            stroke-linecap="round"
+            transform="rotate(-90 50 50)"
+        ></circle>
+
+        <circle
+            cx="50"
+            cy="50"
+            r="{{ rings.1.radius }}"
+            stroke="#3a3a3c"
+            stroke-width="8"
+            fill="none"
+        ></circle>
+
+        <circle
+            cx="50"
+            cy="50"
+            r="{{ rings.1.radius }}"
+            stroke="{{ rings.1.color }}"
+            stroke-width="8"
+            fill="none"
+            stroke-dasharray="{{ rings.1.dash }} {{ rings.1.circ }}"
+            stroke-linecap="round"
+            transform="rotate(-90 50 50)"
+        ></circle>
+
+        <circle
+            cx="50"
+            cy="50"
+            r="{{ rings.2.radius }}"
+            stroke="#3a3a3c"
+            stroke-width="8"
+            fill="none"
+        ></circle>
+
+        <circle
+            cx="50"
+            cy="50"
+            r="{{ rings.2.radius }}"
+            stroke="{{ rings.2.color }}"
+            stroke-width="8"
+            fill="none"
+            stroke-dasharray="{{ rings.2.dash }} {{ rings.2.circ }}"
+            stroke-linecap="round"
+            transform="rotate(-90 50 50)"
+        ></circle>
+    </svg>
+
+    <div class="ring-legend">
+        <div class="row">
+            <span><span class="dot dot-move"></span>Move</span>
+            <span>{{ log.move_cal }}/{{ log.move_goal }} cal</span>
+        </div>
+
+        <div class="row">
+            <span><span class="dot dot-exercise"></span>Exercise</span>
+            <span>{{ log.exercise_min }}/{{ log.exercise_goal }} min</span>
+        </div>
+
+        <div class="row">
+            <span><span class="dot dot-stand"></span>Stand</span>
+            <span>{{ log.stand_hrs }}/{{ log.stand_goal }} hrs</span>
+        </div>
+    </div>
+</section>
+
+<section class="grid2">
+    <article class="card">
+        <div class="label">Calories</div>
+        <div class="big">{{ log.calories }} kcal</div>
+
+        {% if calorie_diff != None %}
+            <div class="label">
+                {% if calorie_diff >= 0 %}
+                    ↑
+                {% else %}
+                    ↓
+                {% endif %}
+                {{ calorie_diff|floatformat:0 }} from yesterday
+            </div>
+        {% endif %}
+
+        <progress
+            class="stat-progress progress-calories"
+            value="{{ log.move_cal }}"
+            max="{{ log.move_goal }}"
+        >
+            {{ log.move_cal }} of {{ log.move_goal }}
+        </progress>
+    </article>
+
+    <article class="card">
+        <div class="label">Weight</div>
+        <div class="big">{{ log.weight }} lbs</div>
+
+        {% if weight_diff != None %}
+            <div class="label">
+                {% if weight_diff <= 0 %}
+                    ↓
+                {% else %}
+                    ↑
+                {% endif %}
+                {{ weight_diff|floatformat:1 }} lbs this week
+            </div>
+        {% endif %}
+
+        <progress
+            class="stat-progress progress-weight"
+            value="60"
+            max="100"
+        >
+            60%
+        </progress>
+    </article>
+
+    <a class="card-link" href="{% url 'water' %}">
+        <article class="card">
+            <div class="label">Water · Tap to update</div>
+            <div class="big">{{ log.water_cups }} / {{ log.water_goal }} cups</div>
+
+            <progress
+                class="stat-progress progress-water"
+                value="{{ log.water_cups }}"
+                max="{{ log.water_goal }}"
+            >
+                {{ log.water_cups }} of {{ log.water_goal }}
+            </progress>
+        </article>
+    </a>
+
+    <article class="card">
+        <div class="label">Steps</div>
+        <div class="big">{{ log.steps|intcomma }}</div>
+        <div class="label">Goal: {{ log.steps_goal|intcomma }}</div>
+
+        <progress
+            class="stat-progress progress-steps"
+            value="{{ log.steps }}"
+            max="{{ log.steps_goal }}"
+        >
+            {{ log.steps }} of {{ log.steps_goal }}
+        </progress>
+    </article>
+</section>
+{% else %}
+<section class="card">
+    <p>No log for today yet. Fill in the form below to see your rings and stats.</p>
+</section>
+{% endif %}
+
+<section class="card">
+    <div class="label">This Week</div>
+
+    <div class="week-grid">
+        {% for d in week_days %}
+            <div>
+                <div class="day-letter">
+                    {{ d.letter|default:d.num }}
+                </div>
+
+                {% if d.has_log and d.is_today %}
+                    <div class="day-circle day-has-log day-today">
+                        {{ d.num }}
+                    </div>
+                {% elif d.has_log %}
+                    <div class="day-circle day-has-log">
+                        {{ d.num }}
+                    </div>
+                {% elif d.is_today %}
+                    <div class="day-circle day-today">
+                        {{ d.num }}
+                    </div>
+                {% else %}
+                    <div class="day-circle">
+                        {{ d.num }}
+                    </div>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p class="label">No weekly data available.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% if log %}
+<section class="card">
+    <div class="label">Water Today</div>
+
+    <div class="cups">
+        {% for cup in water_range %}
+            {% if forloop.counter0 < log.water_cups %}
+                <div class="cup cup-filled"></div>
+            {% else %}
+                <div class="cup"></div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<section class="card">
+    <div class="label">Today's Workout</div>
+
+    {% for w in workouts %}
+        <div class="workout">
+            <div class="workout-left">
+                <div class="workout-icon">🏋️</div>
+
+                <div>
+                    <strong>{{ w.name }}</strong>
+                    <div class="label">
+                        {{ w.start_time }} · {{ w.duration_min }} min · {{ w.category }}
+                    </div>
+                </div>
+            </div>
+
+            <div>{{ w.calories }} cal</div>
+        </div>
+    {% empty %}
+        <p class="label">No workouts logged today.</p>
+    {% endfor %}
+</section>
+
+{% if trend %}
+<section class="card">
+    <div class="row">
+        <div class="label">Weight Trend</div>
+
+        {% if goal %}
+            <div class="label">Goal: {{ goal.target_weight }} lbs</div>
+        {% endif %}
+    </div>
+
+    <div class="weight-list">
+        {% for t in trend %}
+            {% if t.is_today %}
+                <div class="weight-entry weight-entry-today">
+                    <span>Today</span>
+                    <strong>{{ t.weight }} lbs</strong>
+                </div>
+            {% else %}
+                <div class="weight-entry">
+                    <span>Previous entry</span>
+                    <strong>{{ t.weight }} lbs</strong>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<section class="card">
+    <h3>Set Goal</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ goal_form.as_p }}
+        <button type="submit" name="submit_goal">Save Goal</button>
+    </form>
+</section>
+
+<section class="card">
+    <h3>Log Today</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ log_form.as_p }}
+        <button type="submit" name="submit_log">Save Log</button>
+    </form>
+</section>
+
+<section class="card">
+    <h3>Log Workout</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ workout_form.as_p }}
+        <button type="submit" name="submit_workout">Save Workout</button>
+    </form>
+</section>
+{% endblock %}
