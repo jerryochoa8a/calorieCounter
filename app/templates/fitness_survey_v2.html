@@ -145,6 +145,22 @@
         margin-top: 14px;
     }
 
+    .heightdiv {
+        display: flex;
+        align-items: center;
+        width: 100px;
+    }
+
+    .heightdiv input {
+        width: 40px;
+        text-align: center;
+    }
+
+    .heightdiv span {
+        font-size: 20px;
+        margin: 0 2px;
+    }
+
     @media (max-width: 420px) {
         .measurement-grid {
             grid-template-columns: 1fr;
@@ -164,7 +180,7 @@
     <div class="progress-fill"></div>
 </div>
 
-<form method="post" action="{% url 'fitness_survey' %}" id="fitness-survey">
+<form method="post" action="/fitness_Survey" id="fitness-survey">
     {% csrf_token %}
 
     <section class="card">
@@ -173,7 +189,7 @@
 
         <div class="choice-grid">
             <div class="choice">
-                <input type="radio" id="goal-fat-loss" name="fitness_goal" value="cut" required>
+                <input type="radio" id="goal-fat-loss" name="fitness_goal" value="Lose Weight" required>
                 <label for="goal-fat-loss">
                     <span class="choice-icon">🔥</span>
                     <span>
@@ -184,7 +200,7 @@
             </div>
 
             <div class="choice">
-                <input type="radio" id="goal-muscle" name="fitness_goal" value="bulk" required>
+                <input type="radio" id="goal-muscle" name="fitness_goal" value="Gain Weight" required>
                 <label for="goal-muscle">
                     <span class="choice-icon">💪</span>
                     <span>
@@ -195,7 +211,7 @@
             </div>
 
             <div class="choice">
-                <input type="radio" id="goal-maintain" name="fitness_goal" value="maintain" required>
+                <input type="radio" id="goal-maintain" name="fitness_goal" value="Maintain Weight" required>
                 <label for="goal-maintain">
                     <span class="choice-icon">⚖️</span>
                     <span>
@@ -252,15 +268,24 @@
             </div>
 
             <div>
-                <label for="height">Height (inches)</label>
+                <label for="height">Height (feet/inches)</label>
+                <!-- <div class="heightdiv"> -->
                 <input
-                    type="number"
+                    type="text"
                     id="height"
                     name="height"
-                    min="36"
-                    max="96"
-                    step="1"
-                    placeholder="Example: 70"
+                    
+                    placeholder="Example: 5.10"
+                    required
+                >
+            </div>
+
+            <div>
+                <label for="age">Age</label>
+                <input
+                    type="number"
+                    id="age"
+                    name="age"
                     required
                 >
             </div>
@@ -269,8 +294,8 @@
                 <label for="sex">Sex</label>
                 <select id="sex" name="sex" required>
                     <option value="">Select sex</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
             </div>
         </div>
@@ -282,11 +307,11 @@
 
         <select name="activity_level" id="activity-level" required>
             <option value="">Select an activity level</option>
-            <option value="sedentary">Mostly inactive</option>
-            <option value="light">Light activity, 1–2 workouts per week</option>
-            <option value="moderate">Moderate activity, 3–4 workouts per week</option>
-            <option value="active">Very active, 5–6 workouts per week</option>
-            <option value="very_active">Extremely active or physical job</option>
+            <option value="Sedentary">Mostly inactive</option>
+            <option value="Lightly Active">Light activity, 1–2 workouts per week</option>
+            <option value="Moderately Active">Moderate activity, 3–4 workouts per week</option>
+            <!-- <option value="active">Very active, 5–6 workouts per week</option> -->
+            <option value="Very Active">Extremely active or physical job</option>
         </select>
     </section>
 

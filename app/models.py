@@ -116,10 +116,11 @@ class Food(models.Model):
 
      name = models.CharField(max_length=100)
 
-     calories = models.IntegerField()
-     protein = models.FloatField()
-     carbs = models.FloatField()
-     fat = models.FloatField()
+     calories = models.IntegerField(default=0)
+     protein = models.FloatField(default=0)
+     carbs = models.FloatField(default=0)
+     fiber = models.FloatField(default=0)
+     fat = models.FloatField(default=0)
 
      def __str__(self):
         return self.name
@@ -153,7 +154,7 @@ class FoodLog(models.Model):
         for entry in self.foodlogentry_set.all():
             totalCalories += entry.calculateCalories()
 
-            return totalCalories
+        return totalCalories
 
      def __str__(self):
          return (

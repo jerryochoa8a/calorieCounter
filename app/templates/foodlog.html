@@ -126,7 +126,7 @@
 <section class="summary-grid">
     <article class="card summary-card">
         <div class="label">Calories Today</div>
-        <div class="big">{{ total_calories|default:0|floatformat:0 }}</div>
+        <div class="big">{{ foodlog_cal|default:0|floatformat:0 }} / {{targetCalories|default:0|floatformat:0}}</div>
     </article>
 
     <article class="card summary-card">
@@ -137,20 +137,11 @@
 
 <section class="card">
     <h2>Search Food</h2>
+    {{error}}
     <p class="label">Example: amount = 2, food = eggs. Nutrition comes from CalorieNinjas.</p>
 
     <form method="post" action="searchFood">
         {% csrf_token %}
-
-        <label for="amount">Amount / serving</label>
-        <input
-            id="amount"
-            name="amount"
-            type="text"
-            placeholder="Example: 2"
-            value="{{ request.POST.amount|default:'' }}"
-            required
-        >
 
         <label for="food">Food</label>
         <input
@@ -161,6 +152,17 @@
             value="{{ request.POST.food|default:'' }}"
             required
         >
+        
+        <label for="amount">Amount / serving</label>
+        <input
+            id="amount"
+            name="amount"
+            type="text"
+            placeholder="Example: 2"
+            value="{{ request.POST.amount|default:'' }}"
+            
+        >
+
 
         <button type="submit">Search Food</button>
     </form>
@@ -194,7 +196,7 @@
         </div>
     </div>
 
-    <form method="post" action="{% url 'add_food' %}">
+    <form method="post" action="/addto_Foodlog">
         {% csrf_token %}
 
         <label for="quantity">Quantity / servings</label>
@@ -208,34 +210,43 @@
             required
         >
 
+        <input type="hidden" name="name" value="{{ foodInfo.name }}">
+        <input type="hidden" name="calories" value="{{ foodInfo.calories }}">
+        <input type="hidden" name="protein" value="{{ foodInfo.protein }}">
+        <input type="hidden" name="carbs" value="{{ foodInfo.carbs }}">
+        <input type="hidden" name="fiber" value="{{ foodInfo.fiber }}">
+        <input type="hidden" name="fat" value="{{ foodInfo.fat }}">
+
         <button type="submit">Add to Today’s Log</button>
     </form>
 </section>
 {% endif %}
 
 <section class="card">
-    <h2>Today’s Food</h2>
+    <h2>Today’s Food: ({{foodlog_cal|floatformat:0}} Total)</h2>
 
     {% for entry in entries %}
         <div class="food-entry">
             <div>
-                <div class="food-name">{{ entry.food.name }}</div>
+                <div class="food-name">{{ entry.name }}</div>
                 <div class="food-meta">
                     {{ entry.quantity }} serving{{ entry.quantity|pluralize }} ·
-                    Protein {{ entry.food.protein|floatformat:1 }}g ·
-                    Carbs {{ entry.food.carbs|floatformat:1 }}g ·
-                    Fat {{ entry.food.fat|floatformat:1 }}g
+                    Protein {{ entry.protein|floatformat:1 }}g ·
+                    Carbs {{ entry.carbs|floatformat:1 }}g ·
+                    Fiber {{ entry.fiber|floatformat:1 }}g ·
+                    Fat {{ entry.fat|floatformat:1 }}g
                 </div>
             </div>
 
             <div class="food-calories">
-                <div>{{ entry.calculateCalories|floatformat:0 }} cal</div>
+                <div>{{ entry.calories|floatformat:0 }} cal</div>
                 <form
                     class="remove-form"
                     method="post"
-                    action="{% url 'remove_food' entry.id %}"
+                    action="/remove_food"
                 >
                     {% csrf_token %}
+                    <input type="hidden" name="food_id" value="{{entry.id}}">
                     <button class="remove-button" type="submit">Remove</button>
                 </form>
             </div>
