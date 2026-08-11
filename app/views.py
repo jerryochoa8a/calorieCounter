@@ -17,6 +17,7 @@ from django.conf import settings
 import requests
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from datetime import date # for the foodlog
 
 
 
@@ -37,15 +38,35 @@ def dashboard(request):
 def startup(request):
     return render(request, "startup.html")
 
-def foodlogPage(request):
-    return render(request, "foodlog.html")
-
 def waterPage(request):
     return render(request, 'waterlog.html')
 
-
 def fitness_survey(request):
-    return render(request, "fitness_survey.html")
+    return render(request, "fitness_survey_v2.html")
+
+def foodlogPage(request):
+    userInfo = User.objects.get(id=request.session['userid'])
+    profileInfo = Profile.objects.get(user=userInfo)
+    todaysDate = date.today()
+
+    #Target calories
+    TC = TargetCalories.objects.get(profile=profileInfo)
+
+    # Food log items
+    foodlog = FoodLog.objects.filter(
+        profile=profileInfo, 
+        date=todaysDate
+    ).first()
+    entries = foodlog.foods.all()
+
+    foodlog_cal = foodlog.calculateTotalCalories()
+
+    return render(request, "foodlog.html", 
+                  {
+                    "entries": entries, 
+                    "foodlog_cal": foodlog_cal,
+                    "targetCalories": TC.target_calories
+                    })
 
 
 ## Base(Home) is the main page to the website- able to toggle through pages
@@ -191,6 +212,120 @@ def logout(request):
      return redirect('/')
 
 
+#food API search
+def GetfoodInfo(request):
+    """
+    Function Name: GetfoodInfo
+    Programmer: Jerry Ochoa
+
+    This function searches for food information using the CalorieNinjas API.
+    The API works best when giving an amount, such as serving size, first then 
+    the foods name. The search returns a JSON response where we then transform
+    and extract the data into a dictionary.
+    (Future Plans) - this information will pass the nutritional information to 
+    a template for the user to confirm, before storing into the users food log. 
+    """
+    # the Search is = Amount + Food
+    if not request.POST['food']:
+        return render(request, "foodlog.html", {"error": "Food Name can not be empty."})
+    else:
+        food = request.POST['food']
+
+    if not request.POST['amount']:
+        amount = "1"
+    else:
+        amount = request.POST['amount']
+
+    # food = request.POST['food']
+    # amount = request.POST['amount']
+        
+    search = amount +" "+ food
+
+    # api_key = settings.calorieninjas_APIKey
+    api_key = "x/emm0VcKlOoc+mRMURCIA==AzrAJ19yrPQ2s7eX"
+
+    url = "https://api.calorieninjas.com/v1/nutrition"
+    headers = {
+        "X-Api-Key": f"{api_key}"
+    }
+    params = {
+       #Ex) "query": "1 eggs",
+       "query": f"{search}",
+    }
+    response = requests.get(url,headers=headers, params=params)
+    data = response.json()
+
+    #Just display to the page to alow the user to confirm info -> addTo_foodlog()
+    if len(data["items"]) == 0:
+        foodInfo = {"name":"No Food item found. please search for another food"}
+    else:    
+        foodInfo = {
+            "name": data["items"][0]["name"], #str, 
+            "calories": data["items"][0]["calories"], #int
+            "protein":data["items"][0]["protein_g"], #int,
+            "carbs":data["items"][0]["carbohydrates_total_g"], #int
+            "fiber":data["items"][0]["fiber_g"], #int
+            "fat":data["items"][0]["fat_total_g"], #int
+        }
+
+    # ! once page is avalable update
+    return render(request,'foodlog.html', {"foodInfo": foodInfo}) 
+    
+    
+def addTo_Foodlog(request):
+    """
+    Function Name: addTo_Foodlog
+    Programmer: Jerry Ochoa
+
+    This function will run after the user has confirmed the food information.
+    We first create a food object with the dictionary that came from our CalorieNinjas API.
+    We then check to see if the users profile already has a food log for the current date.
+    If it does not then we create one and add the food item. If it does then we get the
+    food log and add the food item to the log.
+    """
+    # Makes the food Object - with dictionary
+    foodObj = Food.objects.create(
+        name = request.POST["name"], #str
+        calories = float(request.POST["calories"]), #int
+        protein = float(request.POST["protein"]), #int
+        carbs = float(request.POST["carbs"]), #int
+        fiber = float(request.POST["fiber"]), #int
+        fat = float(request.POST["fat"]), #int
+    )
+
+    print("-"*20)
+    print("***Food object***")
+    print(foodObj)
+    print("-"*20)
+
+    # Checks to see if there is a food Log
+    userInfo = User.objects.get(id=request.session['userid'])
+    profileInfo = Profile.objects.get(user=userInfo)
+    todaysDate = date.today() 
+
+    foodlog_Check = FoodLog.objects.filter(profile=profileInfo, date=todaysDate).exists()
+
+    # No foodLog - create one (profile, Date) -> createFoodlog()
+    if foodlog_Check==False:
+        foodlog = FoodLog.objects.create(
+            profile = profileInfo,
+            date = todaysDate,
+        )
+        foodlog.foods.add(foodObj)
+
+    # food log found - update it
+    else:
+        foodlog = FoodLog.objects.get(profile=profileInfo, date=todaysDate)
+        foodlog.foods.add(foodObj)
+    return redirect('/food_log')
+
+
+def removeFood(request):
+    food = Food.objects.get(id=request.POST["food_id"])
+    food.delete()
+    return redirect("/food_log")
+
+
 # creating the user profile
 def fitnessSurvey(request):
     """
@@ -207,114 +342,70 @@ def fitnessSurvey(request):
     because this information will later be used to calculate the users "Target Calories".
     """
     user_id = request.session.get('userid')
-    user = User.objects.get(id = user_id)
+    userinfo = User.objects.get(id = user_id)
 
-    profile = Profile.objects.create(
-        user = user,
-        weight = int(request.POST['weight']),
-        height = int(request.POST['height']),
-        age = int(request.POST['age']),
-        sex = request.POST['sex'],
-        activityLevels = request.POST['activityLevels'],
-        fitnessGoals = request.POST['fitnessGoals'],
-    )
+    # format the height
+    height = request.POST['height']
+    splitStr = height.split('.')
+    feet = int(splitStr[0])
+    inches = int(splitStr[1])
+    height_inch = feet + inches 
+
+    profile_Check = Profile.objects.filter(user=userinfo).exists()
+
+    if profile_Check == True:
+        # Updates the profile
+        profile = Profile.objects.get(user=userinfo)
+        profile.weight = int(request.POST['current_weight'])
+        profile.height = height_inch
+        profile.age = int(request.POST['age'])
+        profile.sex = request.POST['sex']
+        profile.activityLevels = request.POST['activity_level']
+        profile.fitnessGoals = request.POST['fitness_goal']
+
+    else:
+        # creates the profile
+        profile = Profile.objects.create(
+            user = userinfo,
+            weight = int(request.POST['weight']),
+            height = height_inch,
+            age = int(request.POST['age']),
+            sex = request.POST['sex'],
+            activityLevels = request.POST['activityLevels'],
+            fitnessGoals = request.POST['fitnessGoals'],
+        )
+
+    # print("-"*20)
+    # print("NEW PROFILE CREATED:")
+    # print(profile)
+    # print("-"*20)
+
+    targCal_Check = TargetCalories.objects.filter(profile=profile).exists()
+
+    if targCal_Check == True:
+        # update TC
+        targCal = TargetCalories.objects.get(profile=profile)
+        targCal.target_calories = calculateTargetCalories(profile)
+    else:
+        # create the TC model
+        targCal = TargetCalories.objects.create(
+            profile=profile,
+            target_calories = calculateTargetCalories(profile)
+        )
+
+    # print("-"*20)
+    # print("TARGET CALORIES:")
+    # print(targCal.target_calories)
+    # print("-"*20)
 
     ## after creating profile object store Target calories
-    # calculateTargetCalories(profile.id)
+    # calculateTargetCalories(profile)
 
-    return redirect('/base')
-    
 
-#food API search
-def GetfoodInfo(request):
-    """
-    Function Name: GetfoodInfo
-    Programmer: Jerry Ochoa
-
-    This function searches for food information using the CalorieNinjas API.
-    The API works best when giving an amount, such as serving size, first then 
-    the foods name. The search returns a JSON response where we then transform
-    and extract the data into a dictionary.
-    (Future Plans) - this information will pass the nutritional information to 
-    a template for the user to confirm, before storing into the users food log. 
-    """
-    # Search = Amount + Food
-    amount = request.POST['amount']
-    food = request.POST['food']
-    search = amount + food
-
-    api_key = settings.calorieninjas_APIKey
-
-    url = "https://api.calorieninjas.com/v1/nutrition"
-    headers = {
-        "X-Api-Key": f"{api_key}"
-    }
-    params = {
-       #Ex) "query": "1 eggs",
-       "query": f"{search}",
-    }
-    response = requests.get(url,headers=headers, params=params)
-    data = response.json()
-
-    #Just display to the page to alow the user to confirm info -> addTo_foodlog()    
-    foodInfo = {
-        "name": data["items"][0]["name"], #str, 
-        "calories": data["items"][0]["calories"], #int
-        "protein":data["items"][0]["protein_g"], #int,
-        "carbs":data["items"][0]["carbohydrates_total_g"], #int
-        "fiber":data["items"][0]["fiber_g"], #int
-        "fat":data["items"][0]["fat_total_g"], #int
-    }
-
-    # ! once page is avalable update
-    return render(request,'html', foodInfo) 
-    
-    
-def addTo_Foodlog(request, foodInfo):
-    """
-    Function Name: addTo_Foodlog
-    Programmer: Jerry Ochoa
-
-    This function will run after the user has confirmed the food information.
-    We first create a food object with the dictionary that came from our CalorieNinjas API.
-    We then check to see if the users profile already has a food log for the current date.
-    If it does not then we create one and add the food item. If it does then we get the
-    food log and add the food item to the log.
-    """
-    # Makes the food Object - with dictionary
-    foodItem = Food.objects.create(
-        name =foodInfo.name, #str
-        calories = foodInfo.calories, #int
-        protein = foodInfo.protein, #int
-        carbs = foodInfo.carbs, #int
-        fiber = foodInfo.fiber, #int
-        fat = foodInfo.fat, #int
-    )
-
-    # Checks to see if there is a food Log
-    userInfo = User.objects.get(id=request.session['userid'])
-    profileInfo = Profile.objects.get(user=userInfo) 
-
-    foodlog_Check = FoodLog.objects.filter(profile=profileInfo, date=date).exists()
-
-    # No foodLog - create one (profile, Date) -> createFoodlog()
-    if foodlog_Check==False:
-        FoodLog.objects.create(
-            profile = profileInfo,
-            # date = date,
-            food=foodItem
-        )
-    # food log found - update it
-    else:
-        foodLog = FoodLog.objects.get(profile=profileInfo, date=date)
-        foodLog.objects.update(
-            food = foodItem
-        )
-    return()
-
+    return redirect('/dashboard')
 
 # function that calculates target calories 
-def calculateTargetCalories(request, profile_id):
+def calculateTargetCalories(profile):
     
     """
     Function Name: calculateTargetCalories
@@ -333,9 +424,8 @@ def calculateTargetCalories(request, profile_id):
 
     """
 
-    profile = Profile.objects.get(id=profile_id)
-
     # calculates body mass rate (BMR) based on sex, weight, height, and age
+    
 
     if profile.sex == "Female":
         BMR = (10 * profile.weight) + (6.25 * profile.height) - (5 * profile.age) - 161

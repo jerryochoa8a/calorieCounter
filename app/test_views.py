@@ -24,18 +24,17 @@ def test_CTC(mocker): #Note that pytest funtions need to start with "test_"
         return_value=profile
     )
 
-    result = calculateTargetCalories(None, 1) # Normaly takes (request, profile_id)
+    # Normaly takes (request, profile_id)
+    result = calculateTargetCalories(None, 1) 
     assert result == pytest.approx(1234.3)
 
 
 
 # test foodAPI
 def test_foodAPI(mocker, settings):
-    settings.calorieninjas_APIKey = "<PUT API KEY HERE>" # API Key
-
+    settings.calorieninjas_APIKey = "x/emm0VcKlOoc+mRMURCIA==AzrAJ19yrPQ2s7eX" # API Key
     # Fake request
     request = mocker.Mock()
-
     request.POST = {
         "amount": "1 ",
         "food": "egg"
@@ -55,3 +54,5 @@ def test_foodAPI(mocker, settings):
     assert foodInfo["carbs"] >= 0
     assert foodInfo["fiber"] >= 0
     assert foodInfo["fat"] >= 0
+
+    

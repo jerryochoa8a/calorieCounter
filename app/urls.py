@@ -26,8 +26,10 @@ urlpatterns = [
     path('new_user', views.new_user), ## registers User
     path('user_login', views.user_login), ## Login User
     path('logout', views.logout), ##logout User    
-    path('fitnessSurvey', views.fitnessSurvey), ## submit Fitness Survey
-    path('searchFood', views.GetfoodInfo),  ##food API  
+    path('fitness_Survey', views.fitnessSurvey), ## submit Fitness Survey
+    path('searchFood', views.GetfoodInfo),  ##food API
+    path('addto_Foodlog', views.addTo_Foodlog), ##Add API info to foodlog 
+    path('remove_food', views.removeFood), # removes food from user log 
 
 ]
 
